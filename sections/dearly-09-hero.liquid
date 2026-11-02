@@ -1,0 +1,44 @@
+{%- comment -%}
+  Dearly 9. Hero headline and the real deadline.
+  The deadline is the only urgency element on the page. It renders only while its date
+  setting is filled in and today is on or before that date. Nothing resets, nothing counts down.
+{%- endcomment -%}
+{%- liquid
+  assign deadline = section.settings.deadline_date | strip
+  assign today = 'now' | date: '%Y-%m-%d'
+  assign show_deadline = false
+  if deadline.size == 10 and section.settings.deadline_text != blank
+    if deadline >= today
+      assign show_deadline = true
+    endif
+  endif
+-%}
+<div class="d-section d-hero-band">
+  <div class="d-wrap d-pad">
+    <div class="d-measure">
+      <h2 class="d-hero">{{ section.settings.headline | escape }}</h2>
+      {%- if section.settings.subhead != blank -%}
+        <p class="d-voice d-lead d-pretty">{{ section.settings.subhead | escape }}</p>
+      {%- endif -%}
+      {%- if show_deadline -%}
+        <p class="d-deadline" data-d-deadline="{{ deadline | escape }}">{{ section.settings.deadline_text | escape }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Dearly 9: Hero",
+  "tag": "section",
+  "class": "dearly-band",
+  "settings": [
+    { "type": "text", "id": "headline", "label": "Headline", "default": "The gift that says what you’ve been trying to say.", "info": "Keep the non-breaking space before the last word so it never sits alone on a line." },
+    { "type": "textarea", "id": "subhead", "label": "Supporting line", "default": "An infinity heart necklace, gift-boxed with a message card she’ll keep long after the wrapping is gone." },
+    { "type": "header", "content": "Christmas deadline" },
+    { "type": "text", "id": "deadline_date", "label": "Last safe order date (YYYY-MM-DD)", "default": "2026-12-05", "info": "Set by hand from real processing plus transit times. Leave empty to hide. The line disappears on its own the day after this date. If supplier transit runs longer, move it earlier, never later." },
+    { "type": "text", "id": "deadline_text", "label": "Deadline line", "default": "Order by December 5 for delivery before Christmas." }
+  ],
+  "presets": [{ "name": "Dearly 9: Hero" }]
+}
+{% endschema %}

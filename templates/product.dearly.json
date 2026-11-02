@@ -1,0 +1,164 @@
+{
+  "sections": {
+    "d01-announcement": {
+      "type": "dearly-01-announcement",
+      "settings": {}
+    },
+    "d02-gallery": {
+      "type": "dearly-02-gallery",
+      "settings": {}
+    },
+    "d03-title-price": {
+      "type": "dearly-03-title-price",
+      "settings": {}
+    },
+    "d04-delivery": {
+      "type": "dearly-04-delivery",
+      "settings": {}
+    },
+    "d05-rating-anchor": {
+      "type": "dearly-05-rating-anchor",
+      "settings": {}
+    },
+    "d06-variants": {
+      "type": "dearly-06-variants",
+      "settings": {}
+    },
+    "d07-add-to-cart": {
+      "type": "dearly-07-add-to-cart",
+      "settings": {}
+    },
+    "d08-trust": {
+      "type": "dearly-08-trust",
+      "settings": {}
+    },
+    "d09-hero": {
+      "type": "dearly-09-hero",
+      "settings": {}
+    },
+    "d10-meaning": {
+      "type": "dearly-10-meaning",
+      "settings": {}
+    },
+    "d11-card": {
+      "type": "dearly-11-card",
+      "settings": {}
+    },
+    "d12-ready": {
+      "type": "dearly-12-ready",
+      "settings": {}
+    },
+    "d13-specs": {
+      "type": "dearly-13-specs",
+      "settings": {}
+    },
+    "d14-guarantee": {
+      "type": "dearly-14-guarantee",
+      "settings": {}
+    },
+    "d15-founder": {
+      "type": "dearly-15-founder",
+      "settings": {}
+    },
+    "d16-reviews": {
+      "type": "dearly-16-reviews",
+      "settings": {}
+    },
+    "d17-faq": {
+      "type": "dearly-17-faq",
+      "settings": {},
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Will it tarnish or turn her skin green?",
+            "answer": "<p>No. The pendant is plated over stainless steel, not brass or copper, so it won’t oxidize or leave a mark. It’s safe in the shower and safe to sleep in. Take it off for a pool or the ocean, since chlorine and salt dull any plating over time.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>7 to 14 business days to most countries, free. You’ll get a tracking link by email as soon as it ships. If you need it for a specific date, order with at least three weeks of room.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship outside the US?",
+            "answer": "<p>Yes, worldwide, and shipping is free everywhere. Orders outside the US and Canada tend toward the longer end of the 7 to 14 day window.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Will there be a price or a receipt in the box?",
+            "answer": "<p>No. Nothing in the package shows what you paid. No invoice, no price tag, no packing slip with a total. Your receipt goes to your email only.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "What if the chain is the wrong length?",
+            "answer": "<p>It adjusts from 18 to 22 inches, which covers collarbone to just below it on almost everyone. If it still isn’t right, the 90-day return covers it.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "What if it arrives damaged?",
+            "answer": "<p>Email us a photo and we send a replacement at no cost. You don’t need to send the damaged one back.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>90 days, full refund, no questions asked. Email <a href=\"mailto:hello@givedearly.com\">hello@givedearly.com</a> and we handle it.</p>"
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "Why buy this instead of something on Amazon?",
+            "answer": "<p>You can find a heart pendant for less. What’s harder to find is one that shows up ready to give, with the card already written and inside the box, and no price anywhere in the package. That’s what you’re paying for. If it isn’t worth it to you, buy the cheaper one. We won’t be offended.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8"
+      ]
+    },
+    "d18-footer": {
+      "type": "dearly-18-footer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "d01-announcement",
+    "d02-gallery",
+    "d03-title-price",
+    "d04-delivery",
+    "d05-rating-anchor",
+    "d06-variants",
+    "d07-add-to-cart",
+    "d08-trust",
+    "d09-hero",
+    "d10-meaning",
+    "d11-card",
+    "d12-ready",
+    "d13-specs",
+    "d14-guarantee",
+    "d15-founder",
+    "d16-reviews",
+    "d17-faq",
+    "d18-footer"
+  ]
+}

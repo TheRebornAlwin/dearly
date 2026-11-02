@@ -1,0 +1,31 @@
+{%- comment -%}
+  Dearly 5. Rating anchor. Renders nothing at zero reviews, and nothing while the toggle is off.
+  Every number shown comes from the review app's metafields. Nothing is hardcoded.
+{%- endcomment -%}
+{%- if product.metafields.reviews.rating_count.value > 0 -%}
+  {%- liquid
+    assign count = product.metafields.reviews.rating_count.value | plus: 0
+    assign rating = product.metafields.reviews.rating.value
+    assign minimum = section.settings.min_count | plus: 0
+  -%}
+  {%- if section.settings.enabled and count >= minimum and rating -%}
+  <div class="d-section d-buy">
+    <p class="d-buy__inner d-rating">
+      <a href="#d-reviews">{{ rating.rating | round: 1 }} out of {{ rating.scale_max | round: 0 }}, from {{ count }} {% if count == 1 %}review{% else %}reviews{% endif %}</a>
+    </p>
+  </div>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Dearly 5: Rating anchor",
+  "tag": "div",
+  "class": "dearly-buy",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Show the rating anchor", "default": false, "info": "Turn on once there are five or more real reviews. It renders nothing at zero reviews regardless." },
+    { "type": "range", "id": "min_count", "label": "Minimum real reviews before showing", "min": 1, "max": 20, "step": 1, "default": 5 }
+  ],
+  "presets": [{ "name": "Dearly 5: Rating anchor" }]
+}
+{% endschema %}

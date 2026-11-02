@@ -1,0 +1,51 @@
+{%- comment -%}
+  Dearly 11. The card. The one dark, full-bleed section, and the only motion on the page:
+  a scroll-driven settle, gated behind @supports and prefers-reduced-motion in dearly.css.
+  Option A: a photograph of the card (choose it below). Option B, used when no photo is chosen:
+  the card set in HTML type. Either way the card's words are readable to screen readers.
+{%- endcomment -%}
+{%- liquid
+  assign card_alt = section.settings.card_text | newline_to_br | replace: '<br />', ' ' | strip_newlines | strip
+  assign card_lines = section.settings.card_text | newline_to_br | split: '<br />'
+-%}
+<div class="d-section d-card-band">
+  <div class="d-card-stage">
+    {%- if section.settings.card_image != blank -%}
+      <figure class="d-card-object">
+        {{ section.settings.card_image | image_url: width: 1600 | image_tag:
+          widths: '390, 768, 1200, 1600',
+          sizes: '(min-width: 990px) 56vw, 86vw',
+          loading: 'lazy',
+          alt: card_alt }}
+      </figure>
+    {%- else -%}
+      <div class="d-card-object d-card-paper" role="img" aria-label="The message card. It reads: {{ card_alt | escape }}">
+        {%- for line in card_lines -%}
+          {%- assign l = line | strip -%}
+          {%- if l != blank -%}<p aria-hidden="true">{{ l | escape }}</p>{%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <h2 class="d-card-line">{{ section.settings.headline | escape }}</h2>
+    {%- if section.settings.show_body and section.settings.body != blank -%}
+      <div class="d-voice d-card-body d-pretty">{{ section.settings.body }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Dearly 11: The card",
+  "tag": "section",
+  "class": "dearly-band",
+  "settings": [
+    { "type": "image_picker", "id": "card_image", "label": "Card photograph (option A)", "info": "A clean photo of the card shot flat on a dark surface. Leave empty to use the typeset card (option B)." },
+    { "type": "textarea", "id": "card_text", "label": "Card text", "default": "To my beautiful girlfriend.\nOf all the things I’m bad at saying, this is the one I mean most.\nI love you.", "info": "Used as the photo's alt text, or set in type when there is no photo. One paragraph per line." },
+    { "type": "text", "id": "headline", "label": "The one line beside the card", "default": "The part she’ll keep in a drawer" },
+    { "type": "checkbox", "id": "show_body", "label": "Show the supporting paragraphs", "default": false, "info": "Off by default: the design keeps this section to the card and one line. The copy is kept here, word for word." },
+    { "type": "richtext", "id": "body", "label": "Supporting paragraphs", "default": "<p>Most gifts get worn or used until they’re ordinary. The card doesn’t. It sits in a drawer and she reads it again in four years.</p><p>It arrives already written and already inside the box, in a hand you don’t have to apologize for.</p>" }
+  ],
+  "presets": [{ "name": "Dearly 11: The card" }]
+}
+{% endschema %}

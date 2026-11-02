@@ -1,0 +1,21 @@
+{%- comment -%} Dearly 1. Announcement bar. The only centered, letterspaced, all-caps text on the page. {%- endcomment -%}
+<div class="d-section d-announce{% if section.settings.sticky %} d-announce--sticky{% endif %}" role="region" aria-label="Announcement">
+  <p>
+    {%- if section.settings.text_1 != blank -%}<span>{{ section.settings.text_1 | escape }}</span>{%- endif -%}
+    {%- if section.settings.text_2 != blank -%}<span>{{ section.settings.text_2 | escape }}</span>{%- endif -%}
+  </p>
+</div>
+
+{% schema %}
+{
+  "name": "Dearly 1: Announcement",
+  "tag": "div",
+  "class": "dearly-band",
+  "settings": [
+    { "type": "text", "id": "text_1", "label": "First phrase", "default": "HOLIDAY SALE: 50% OFF EVERYTHING" },
+    { "type": "text", "id": "text_2", "label": "Second phrase", "default": "FREE WORLDWIDE SHIPPING", "info": "Shown beside the first phrase on desktop and on its own line on phones. No middle dot between them." },
+    { "type": "checkbox", "id": "sticky", "label": "Stick to the top on desktop", "default": true, "info": "Never sticky on phones, where it would cost screen height." }
+  ],
+  "presets": [{ "name": "Dearly 1: Announcement" }]
+}
+{% endschema %}

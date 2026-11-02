@@ -1,0 +1,31 @@
+{%- comment -%}
+  Dearly 16. Reviews, from Judge.me (free tier). The whole section, heading included,
+  renders nothing until at least one real review exists. There is no sample or seeded content here.
+{%- endcomment -%}
+{%- if product.metafields.reviews.rating_count.value > 0 -%}
+<div class="d-section" id="d-reviews">
+  <div class="d-wrap d-pad">
+    <div class="d-measure">
+      <h2 class="d-h2">{{ section.settings.headline | escape }}</h2>
+    </div>
+    <div class="d-reviews__mount">
+      <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget jdgm-outside-widget" data-id="{{ product.id }}">
+        {{- product.metafields.judgeme.widget -}}
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Dearly 16: Reviews",
+  "tag": "section",
+  "class": "dearly-band",
+  "settings": [
+    { "type": "paragraph", "content": "Renders nothing while the product has zero reviews. Never import, seed or sync reviews from any other source." },
+    { "type": "text", "id": "headline", "label": "Heading", "default": "Reviews" }
+  ],
+  "presets": [{ "name": "Dearly 16: Reviews" }]
+}
+{% endschema %}

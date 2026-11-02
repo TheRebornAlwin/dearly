@@ -1,0 +1,38 @@
+{%- comment -%}
+  Dearly 6. Variant selector. Off by default: the product has one version today.
+  Reserved for the LED gift box upgrade. Radios sync the hidden id in section 7's form.
+{%- endcomment -%}
+{%- if section.settings.enabled and product.has_only_default_variant == false -%}
+{%- assign current = product.selected_or_first_available_variant -%}
+<div class="d-section d-buy">
+  <fieldset class="d-buy__inner d-variants" data-d-variants>
+    <legend>{{ section.settings.legend | escape }}</legend>
+    <div class="d-variants__opts">
+      {%- for v in product.variants -%}
+        <label class="d-variant">
+          <input type="radio" name="d-variant" value="{{ v.id }}"
+            data-price="{{ v.price | money }}"
+            data-compare="{% if v.compare_at_price > v.price %}{{ v.compare_at_price | money }}{% endif %}"
+            {% if v.id == current.id %}checked{% endif %}
+            {% unless v.available %}disabled{% endunless %}>
+          <span>{{ v.title | escape }}{% unless v.available %} (sold out){% endunless %}</span>
+          <span>{{ v.price | money }}</span>
+        </label>
+      {%- endfor -%}
+    </div>
+  </fieldset>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Dearly 6: Variants",
+  "tag": "div",
+  "class": "dearly-buy",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Enable when a second SKU exists (gift box upgrade).", "default": false, "info": "Renders nothing while off, and nothing while the product has only one version." },
+    { "type": "text", "id": "legend", "label": "Selector label", "default": "Choose a box" }
+  ],
+  "presets": [{ "name": "Dearly 6: Variants" }]
+}
+{% endschema %}

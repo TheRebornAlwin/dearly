@@ -1,0 +1,50 @@
+{%- comment -%}
+  Dearly 13. Specifications. Rows labelled VERIFY in the editor are unconfirmed and must be
+  checked against the real supplier listing before publishing. While the confirmation box is
+  unticked, a note shows inside the theme editor only. Shoppers never see that note.
+{%- endcomment -%}
+{%- liquid
+  assign labels = 'Finish|Stone|Pendant size|Chain|Clasp|Care|Included' | split: '|'
+  assign values = section.settings.finish | append: '|||' | append: section.settings.stone | append: '|||' | append: section.settings.pendant | append: '|||' | append: section.settings.chain | append: '|||' | append: section.settings.clasp | append: '|||' | append: section.settings.care | append: '|||' | append: section.settings.included | split: '|||'
+-%}
+<div class="d-section">
+  <div class="d-wrap d-pad">
+    <div class="d-measure">
+      <h2 class="d-h2">{{ section.settings.headline | escape }}</h2>
+      <dl class="d-specs">
+        {%- for label in labels -%}
+          {%- assign v = values[forloop.index0] | strip -%}
+          {%- if v != blank -%}
+            <dt>{{ label }}</dt>
+            <dd>{{ v | escape }}</dd>
+          {%- endif -%}
+        {%- endfor -%}
+      </dl>
+      {%- if request.design_mode and section.settings.verified == false -%}
+        <p class="d-editor-note">Editor only: five specs are marked VERIFY in this section's settings. Check each against the real supplier listing, then tick the confirmation box. A wrong spec is a refund and a chargeback.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Dearly 13: Specifications",
+  "tag": "section",
+  "class": "dearly-band",
+  "settings": [
+    { "type": "text", "id": "headline", "label": "Heading", "default": "Specifications" },
+    { "type": "header", "content": "Unconfirmed: check before publishing" },
+    { "type": "text", "id": "finish", "label": "VERIFY: Finish", "default": "Two-tone: 18K yellow gold and 14K white gold plating over stainless steel" },
+    { "type": "text", "id": "stone", "label": "VERIFY: Stone", "default": "Cubic zirconia pave detailing" },
+    { "type": "text", "id": "pendant", "label": "VERIFY: Pendant size", "default": "Approximately 0.8 in by 0.7 in" },
+    { "type": "text", "id": "chain", "label": "VERIFY: Chain", "default": "18 in to 22 in adjustable cable chain" },
+    { "type": "text", "id": "clasp", "label": "VERIFY: Clasp", "default": "Lobster clasp" },
+    { "type": "checkbox", "id": "verified", "label": "I have checked every VERIFY spec against the supplier listing", "default": false },
+    { "type": "header", "content": "Confirmed" },
+    { "type": "text", "id": "care", "label": "Care", "default": "Tarnish resistant and water resistant. Remove before swimming." },
+    { "type": "text", "id": "included", "label": "Included", "default": "Necklace, pre-written message card, soft-touch gift box" }
+  ],
+  "presets": [{ "name": "Dearly 13: Specifications" }]
+}
+{% endschema %}

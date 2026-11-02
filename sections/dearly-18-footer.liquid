@@ -1,0 +1,92 @@
+{%- comment -%}
+  Dearly 18. Footer. Three columns on desktop, stacked on phones. Left-aligned throughout.
+  Policy links point at Shopify's own policy pages (Settings, Policies). The cookie policy has
+  no Shopify policy field, so its link is a setting below.
+{%- endcomment -%}
+<footer class="d-section d-raised d-footer">
+  <div class="d-wrap d-pad">
+    <div>
+      <div class="d-footer__cols">
+        <nav aria-labelledby="d-foot-shop">
+          <h2 id="d-foot-shop">Shop</h2>
+          <ul>
+            <li><a href="{{ section.settings.all_gifts_url | default: routes.all_products_collection_url }}">All Gifts</a></li>
+            <li><a href="{{ section.settings.for_her_url }}">For Her</a></li>
+            <li><a href="{{ section.settings.contact_url }}">Contact</a></li>
+          </ul>
+        </nav>
+        <nav aria-labelledby="d-foot-help">
+          <h2 id="d-foot-help">Help</h2>
+          <ul>
+            <li><a href="/policies/shipping-policy">Shipping</a></li>
+            <li><a href="/policies/refund-policy">Returns and Refunds</a></li>
+            <li><a href="{{ section.settings.faq_url }}">FAQ</a></li>
+            <li><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></li>
+          </ul>
+        </nav>
+        <nav aria-labelledby="d-foot-legal">
+          <h2 id="d-foot-legal">Legal</h2>
+          <ul>
+            <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+            <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+            <li><a href="{{ section.settings.cookie_url }}">Cookie Policy</a></li>
+            <li><a href="/policies/refund-policy">Refund Policy</a></li>
+            <li><a href="/policies/shipping-policy">Shipping Policy</a></li>
+            <li><button type="button" data-d-cookie-prefs hidden>Cookie preferences</button></li>
+          </ul>
+        </nav>
+      </div>
+
+      {%- if section.settings.show_newsletter -%}
+        {%- form 'customer', class: 'd-news', id: 'dearly-newsletter' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label for="d-news-email">{{ section.settings.newsletter_label | escape }}</label>
+          <div class="d-news__row">
+            <input id="d-news-email" class="d-input" type="email" name="contact[email]" autocomplete="email" required placeholder="Email address">
+            <button type="submit" class="d-btn">Subscribe</button>
+          </div>
+          {%- if form.posted_successfully? -%}
+            <p class="d-news__msg" role="status">Thank you. You’re on the list.</p>
+          {%- elsif form.errors -%}
+            <p class="d-news__msg" role="alert">That email address didn’t work. Please check it and try again.</p>
+          {%- endif -%}
+        {%- endform -%}
+      {%- endif -%}
+
+      <div class="d-footer__base">
+        <p class="d-wordmark">{{ section.settings.wordmark | escape }}</p>
+        {%- if shop.enabled_payment_types.size > 0 -%}
+          <ul class="d-pay" aria-label="Payment methods">
+            {%- for type in shop.enabled_payment_types -%}
+              <li>{{ type | payment_type_svg_tag }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        <p class="d-copy-line">&copy; {{ section.settings.year }} Dearly</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Dearly 18: Footer",
+  "tag": "div",
+  "class": "dearly-band",
+  "settings": [
+    { "type": "text", "id": "wordmark", "label": "Wordmark", "default": "Dearly" },
+    { "type": "text", "id": "year", "label": "Copyright year", "default": "2026" },
+    { "type": "text", "id": "email", "label": "Contact email", "default": "hello@givedearly.com" },
+    { "type": "header", "content": "Links" },
+    { "type": "text", "id": "all_gifts_url", "label": "All Gifts link", "default": "/collections/all" },
+    { "type": "text", "id": "for_her_url", "label": "For Her link", "default": "/collections/for-her", "info": "Create a collection with the handle for-her, or change this link." },
+    { "type": "text", "id": "contact_url", "label": "Contact link", "default": "/pages/contact" },
+    { "type": "text", "id": "faq_url", "label": "FAQ link", "default": "#faq", "info": "Points at the FAQ on the product page." },
+    { "type": "text", "id": "cookie_url", "label": "Cookie Policy link", "default": "/pages/cookie-policy", "info": "Shopify has no cookie policy field. Create a page with the handle cookie-policy and paste the cookie policy text into it." },
+    { "type": "header", "content": "Email signup" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Show inline email field", "default": true, "info": "Inline only. Never a popup." },
+    { "type": "text", "id": "newsletter_label", "label": "Email field label", "default": "Email updates from Dearly" }
+  ],
+  "presets": [{ "name": "Dearly 18: Footer" }]
+}
+{% endschema %}

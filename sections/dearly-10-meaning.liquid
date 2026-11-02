@@ -1,0 +1,22 @@
+{%- comment -%} Dearly 10. What it means. {%- endcomment -%}
+<div class="d-section">
+  <div class="d-wrap d-pad">
+    <div class="d-measure">
+      <h2 class="d-h2">{{ section.settings.headline | escape }}</h2>
+      <div class="d-voice d-body d-pretty">{{ section.settings.body }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Dearly 10: What it means",
+  "tag": "section",
+  "class": "dearly-band",
+  "settings": [
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Two hearts, one unbroken line" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>The pendant is a single loop that doubles back on itself. No start, no finish. You don’t have to explain it. She will understand it the moment she sees it.</p>" }
+  ],
+  "presets": [{ "name": "Dearly 10: What it means" }]
+}
+{% endschema %}

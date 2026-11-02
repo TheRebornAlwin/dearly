@@ -1,0 +1,97 @@
+{%- comment -%}
+  Dearly 2. Gallery. Reads the product's own media, in the order set in Shopify admin.
+  Required order: 1 card readable beside open box, 2 box open with necklace and card,
+  3 pendant close-up, 4 worn at collarbone, 5 closed box in hand, 6 full set flat.
+  Mobile: swipe with dots. Desktop: main image with a thumbnail row beneath. Click to zoom.
+{%- endcomment -%}
+{%- liquid
+  assign images = product.media | where: 'media_type', 'image'
+  if images.size == 0
+    assign images = product.images
+  endif
+  assign zoom_id = 'd-zoom-' | append: section.id
+  assign alts = section.settings.alt_1 | append: '|||' | append: section.settings.alt_2 | append: '|||' | append: section.settings.alt_3 | append: '|||' | append: section.settings.alt_4 | append: '|||' | append: section.settings.alt_5 | append: '|||' | append: section.settings.alt_6 | split: '|||'
+-%}
+{%- if images.size > 0 -%}
+<div class="d-section d-gallery" data-d-gallery>
+  <div class="d-gallery__track" role="region" aria-roledescription="carousel" aria-label="Product images" tabindex="0">
+    {%- for media in images -%}
+      {%- liquid
+        assign img = media.preview_image | default: media
+        assign i = forloop.index0
+        assign alt = media.alt
+        if alt == blank or alt == product.title
+          assign alt = alts[i] | default: product.title
+        endif
+      -%}
+      <button type="button"
+        class="d-gallery__slide"
+        popovertarget="{{ zoom_id }}"
+        data-zoom-src="{{ img | image_url: width: 2000 }}"
+        data-zoom-alt="{{ alt | escape }}"
+        aria-label="Enlarge image {{ forloop.index }} of {{ images.size }}">
+        {%- if forloop.first -%}
+          {{ img | image_url: width: 1600 | image_tag:
+            widths: '390, 768, 1200, 1600',
+            sizes: '(min-width: 990px) 40vw, 80vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            preload: true,
+            alt: alt }}
+        {%- else -%}
+          {{ img | image_url: width: 1600 | image_tag:
+            widths: '390, 768, 1200, 1600',
+            sizes: '(min-width: 990px) 40vw, 80vw',
+            loading: 'lazy',
+            alt: alt }}
+        {%- endif -%}
+      </button>
+    {%- endfor -%}
+  </div>
+
+  {%- if images.size > 1 -%}
+  <div class="d-gallery__dots" aria-label="Choose image">
+    {%- for media in images -%}
+      <button type="button" class="d-gallery__dot" data-d-goto="{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Show image {{ forloop.index }}"></button>
+    {%- endfor -%}
+  </div>
+
+  <ul class="d-gallery__thumbs" aria-label="Choose image">
+    {%- for media in images -%}
+      {%- assign img = media.preview_image | default: media -%}
+      <li>
+        <button type="button" class="d-thumb" data-d-goto="{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Show image {{ forloop.index }}">
+          {{ img | image_url: width: 160 | image_tag: width: 72, height: 90, loading: 'lazy', alt: '' }}
+        </button>
+      </li>
+    {%- endfor -%}
+  </ul>
+  {%- endif -%}
+
+  <div id="{{ zoom_id }}" class="d-zoom" popover>
+    <img alt="" width="1600" height="2000">
+    <button type="button" class="d-zoom__close" popovertarget="{{ zoom_id }}" popovertargetaction="hide">Close</button>
+  </div>
+</div>
+{%- elsif request.design_mode -%}
+<div class="d-section d-buy"><p class="d-editor-note">Dearly gallery: add the six product images to this product in Shopify admin, card image first.</p></div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Dearly 2: Gallery",
+  "tag": "div",
+  "class": "dearly-gallery-wrap",
+  "settings": [
+    { "type": "paragraph", "content": "Images come from the product's media in Shopify admin. Image 1 must be the message card, readable, because it is what the ad clicked through to." },
+    { "type": "header", "content": "Fallback alt text", "info": "Used when an image has no alt text of its own in Shopify admin." },
+    { "type": "text", "id": "alt_1", "label": "Image 1 alt", "default": "The message card beside the open gift box. It reads: To my beautiful girlfriend. Of all the things I’m bad at saying, this is the one I mean most. I love you." },
+    { "type": "text", "id": "alt_2", "label": "Image 2 alt", "default": "The gift box open, with the infinity heart necklace and the message card inside" },
+    { "type": "text", "id": "alt_3", "label": "Image 3 alt", "default": "Close-up of the infinity heart pendant" },
+    { "type": "text", "id": "alt_4", "label": "Image 4 alt", "default": "The necklace worn at the collarbone" },
+    { "type": "text", "id": "alt_5", "label": "Image 5 alt", "default": "The closed gift box held in a hand, showing its size" },
+    { "type": "text", "id": "alt_6", "label": "Image 6 alt", "default": "The full set laid flat: gift box, message card and necklace" }
+  ],
+  "presets": [{ "name": "Dearly 2: Gallery" }]
+}
+{% endschema %}

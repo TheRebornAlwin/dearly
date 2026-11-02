@@ -1,0 +1,101 @@
+{%- comment -%}
+  Dearly 3. Title and price, plus Product and BreadcrumbList structured data.
+  The compare-at price always comes from Shopify's compare_at_price field.
+  No aggregateRating or review properties are emitted, on purpose.
+{%- endcomment -%}
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign words = product.title | strip | split: ' '
+  assign last_word = words | last
+  assign word_count = words | size | minus: 1
+-%}
+<div class="d-section d-buy">
+  <div class="d-buy__inner d-title">
+    <h1 class="d-h1">
+      {%- for w in words -%}
+        {%- if forloop.index0 < word_count -%}{{ w | escape }}{% unless forloop.index == word_count %} {% endunless %}{%- endif -%}
+      {%- endfor -%}
+      {%- if word_count > 0 -%}&nbsp;{%- endif -%}{{ last_word | escape }}
+    </h1>
+    <span class="d-stub" aria-hidden="true"></span>
+    <p class="d-price">
+      <span class="d-visually-hidden">Price</span>
+      <span class="d-price__now" data-d-price-now>{{ variant.price | money }}</span>
+      {%- if variant.compare_at_price > variant.price -%}
+        <span class="d-visually-hidden">Regular price</span>
+        <span class="d-price__was" data-d-price-was>{{ variant.compare_at_price | money }}</span>
+        {%- if section.settings.show_saving -%}
+          {%- assign saving = variant.compare_at_price | minus: variant.price -%}
+          <span class="d-price__save">Save {{ saving | money_without_trailing_zeros }}</span>
+        {%- endif -%}
+      {%- endif -%}
+    </p>
+  </div>
+</div>
+
+{%- if section.settings.emit_jsonld -%}
+{%- liquid
+  assign desc = product.description | strip_html | strip_newlines | strip | truncate: 5000
+  if desc == blank
+    assign desc = section.settings.fallback_description
+  endif
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ desc | json }},
+  "url": {{ request.origin | append: product.url | json }},
+  {%- if variant.sku != blank %}
+  "sku": {{ variant.sku | json }},
+  {%- endif %}
+  "image": [
+    {%- for media in product.media -%}
+      {%- assign img = media.preview_image | default: media -%}
+      {{ img | image_url: width: 1600 | prepend: 'https:' | json }}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ],
+  "brand": { "@type": "Brand", "name": "Dearly" },
+  "offers": {
+    "@type": "Offer",
+    "url": {{ request.origin | append: variant.url | json }},
+    "price": {{ variant.price | divided_by: 100.0 | json }},
+    "priceCurrency": "USD",
+    "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "itemCondition": "https://schema.org/NewCondition"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": {{ request.origin | append: routes.root_url | json }} },
+    {%- if collection -%}
+    { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": {{ request.origin | append: collection.url | json }} },
+    { "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": {{ request.origin | append: product.url | json }} }
+    {%- else -%}
+    { "@type": "ListItem", "position": 2, "name": {{ product.title | json }}, "item": {{ request.origin | append: product.url | json }} }
+    {%- endif -%}
+  ]
+}
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Dearly 3: Title and price",
+  "tag": "div",
+  "class": "dearly-buy dearly-buy-first",
+  "settings": [
+    { "type": "paragraph", "content": "Title, price and compare-at price come from the product in Shopify admin. Set the compare-at price to 99.99 there." },
+    { "type": "checkbox", "id": "show_saving", "label": "Show the saving (Save $50)", "default": true, "info": "Calculated from compare-at minus price. Never hardcoded." },
+    { "type": "header", "content": "Structured data" },
+    { "type": "checkbox", "id": "emit_jsonld", "label": "Output Product and Breadcrumb JSON-LD", "default": true, "info": "Turn off only if your theme already outputs Product JSON-LD on this page, to avoid duplicates. If you keep the theme's, make sure it has no aggregateRating." },
+    { "type": "textarea", "id": "fallback_description", "label": "Description for structured data", "info": "Used only when the product description in Shopify is empty.", "default": "An infinity heart pendant necklace, gift-boxed with a pre-written message card. Ships free worldwide." }
+  ],
+  "presets": [{ "name": "Dearly 3: Title and price" }]
+}
+{% endschema %}

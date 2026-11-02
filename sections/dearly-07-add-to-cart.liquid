@@ -1,0 +1,46 @@
+{%- comment -%}
+  Dearly 7. Add to cart, plus the sticky bottom bar on phones.
+  No Buy it now button: it skips the cart, and the cart is where the box upgrade will sell.
+{%- endcomment -%}
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign first = product.featured_media
+-%}
+<div class="d-section d-buy">
+  <div class="d-buy__inner d-atc">
+    {%- form 'product', product, id: 'dearly-product-form', novalidate: 'novalidate' -%}
+      <input type="hidden" name="id" value="{{ variant.id }}">
+      <input type="hidden" name="quantity" value="1">
+      {%- if form.errors -%}<p class="d-atc__error" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+      <button type="submit" name="add" class="d-btn" data-d-atc-main {% unless variant.available %}disabled{% endunless %}>
+        {%- if variant.available -%}{{ section.settings.label | escape }}{%- else -%}{{ section.settings.sold_out_label | escape }}{%- endif -%}
+      </button>
+    {%- endform -%}
+  </div>
+</div>
+
+{%- if section.settings.sticky -%}
+<div class="d-section d-sticky" data-d-sticky aria-hidden="true">
+  {%- if first -%}
+    <span class="d-sticky__thumb">{{ first.preview_image | image_url: width: 120 | image_tag: width: 40, height: 40, loading: 'lazy', alt: '' }}</span>
+  {%- endif -%}
+  <span class="d-sticky__price" data-d-price-now>{{ variant.price | money }}</span>
+  <button type="submit" form="dearly-product-form" name="add" class="d-btn" tabindex="-1" {% unless variant.available %}disabled{% endunless %}>
+    {%- if variant.available -%}{{ section.settings.label | escape }}{%- else -%}{{ section.settings.sold_out_label | escape }}{%- endif -%}
+  </button>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Dearly 7: Add to cart",
+  "tag": "div",
+  "class": "dearly-buy",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Button label", "default": "Add to cart" },
+    { "type": "text", "id": "sold_out_label", "label": "Sold out label", "default": "Sold out" },
+    { "type": "checkbox", "id": "sticky", "label": "Sticky bar on phones", "default": true, "info": "Appears once the main button scrolls out of view. Shows the image, the price and the button." }
+  ],
+  "presets": [{ "name": "Dearly 7: Add to cart" }]
+}
+{% endschema %}

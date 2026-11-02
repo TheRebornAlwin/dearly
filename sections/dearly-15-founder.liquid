@@ -1,0 +1,22 @@
+{%- comment -%} Dearly 15. Founder note. Narrow column, no photo. {%- endcomment -%}
+<div class="d-section d-founder">
+  <div class="d-wrap d-pad">
+    <div class="d-measure">
+      <h2 class="d-h2">{{ section.settings.headline | escape }}</h2>
+      <div class="d-voice d-pretty">{{ section.settings.body }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Dearly 15: Founder note",
+  "tag": "section",
+  "class": "dearly-band",
+  "settings": [
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Why we started with a card" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Dearly is new. We don’t have ten thousand reviews to show you and we’re not going to pretend otherwise.</p><p>We started this because the hardest part of giving someone something isn’t picking the object, it’s saying the thing out loud. So we put the words in the box.</p><p>If that’s the gift you’re trying to give, you’re in the right place. Email <a href=\"mailto:hello@givedearly.com\">hello@givedearly.com</a> and a person answers.</p>" }
+  ],
+  "presets": [{ "name": "Dearly 15: Founder note" }]
+}
+{% endschema %}

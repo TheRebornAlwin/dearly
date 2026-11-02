@@ -1,0 +1,21 @@
+{%- comment -%} Dearly 4. Delivery line, directly under the price. Two short lines, no middle dot. {%- endcomment -%}
+<div class="d-section d-buy">
+  <p class="d-buy__inner d-delivery">
+    {{- section.settings.line_1 | escape -}}
+    {%- if section.settings.line_1 != blank and section.settings.line_2 != blank -%}<br>{%- endif -%}
+    {{- section.settings.line_2 | escape -}}
+  </p>
+</div>
+
+{% schema %}
+{
+  "name": "Dearly 4: Delivery line",
+  "tag": "div",
+  "class": "dearly-buy",
+  "settings": [
+    { "type": "text", "id": "line_1", "label": "First line", "default": "Ships free worldwide." },
+    { "type": "text", "id": "line_2", "label": "Second line", "default": "Arrives in 7 to 14 business days.", "info": "Must match the transit time in Settings, Shipping and delivery." }
+  ],
+  "presets": [{ "name": "Dearly 4: Delivery line" }]
+}
+{% endschema %}

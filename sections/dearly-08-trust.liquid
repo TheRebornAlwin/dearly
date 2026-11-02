@@ -1,0 +1,22 @@
+{%- comment -%} Dearly 8. Trust lines. Three, in plain sentence case. No icons, no caps, and never a fourth. {%- endcomment -%}
+<div class="d-section d-buy">
+  <ul class="d-buy__inner d-trust" aria-label="What comes with every order">
+    {%- if section.settings.line_1 != blank -%}<li>{{ section.settings.line_1 | escape }}</li>{%- endif -%}
+    {%- if section.settings.line_2 != blank -%}<li>{{ section.settings.line_2 | escape }}</li>{%- endif -%}
+    {%- if section.settings.line_3 != blank -%}<li>{{ section.settings.line_3 | escape }}</li>{%- endif -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Dearly 8: Trust lines",
+  "tag": "div",
+  "class": "dearly-buy dearly-buy-last",
+  "settings": [
+    { "type": "text", "id": "line_1", "label": "Line 1", "default": "Free worldwide shipping" },
+    { "type": "text", "id": "line_2", "label": "Line 2", "default": "90-day returns" },
+    { "type": "text", "id": "line_3", "label": "Line 3", "default": "Arrives gift-ready" }
+  ],
+  "presets": [{ "name": "Dearly 8: Trust lines" }]
+}
+{% endschema %}

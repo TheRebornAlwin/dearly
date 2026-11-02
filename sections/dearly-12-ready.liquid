@@ -1,0 +1,22 @@
+{%- comment -%} Dearly 12. Ready to give. {%- endcomment -%}
+<div class="d-section">
+  <div class="d-wrap d-pad">
+    <div class="d-measure">
+      <h2 class="d-h2">{{ section.settings.headline | escape }}</h2>
+      <div class="d-voice d-body d-pretty">{{ section.settings.body }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Dearly 12: Ready to give",
+  "tag": "section",
+  "class": "dearly-band",
+  "settings": [
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Nothing to wrap" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>It arrives in a soft-touch box with the card already inside and the necklace already set. No assembly, no wrapping paper, and no prices or invoices anywhere in the package.</p>" }
+  ],
+  "presets": [{ "name": "Dearly 12: Ready to give" }]
+}
+{% endschema %}
