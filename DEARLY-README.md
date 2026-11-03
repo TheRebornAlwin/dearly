@@ -30,17 +30,25 @@ There is no Shopify theme in this repository. These files go into your existing 
 | `sections/dearly-16-reviews.liquid` | 16. Reviews (Judge.me, hidden at zero reviews) |
 | `sections/dearly-17-faq.liquid` | 17. FAQ, plus FAQPage JSON-LD |
 | `sections/dearly-18-footer.liquid` | 18. Footer |
+| `snippets/dearly-head.liquid` | Meta domain verification tag and Meta Pixel base code, rendered in <head>. |
 | `templates/product.dearly.json` | An alternate product template with all 18 sections in order and the 8 FAQ questions filled in. See the note below. |
 | `policies/*.md` | The five policy texts, ready to paste. |
 
 ### Changed in your theme (you make this edit)
 
-`layout/theme.liquid` needs two lines. Nothing else in it changes. Put the first just before `</head>`:
+`layout/theme.liquid` needs three lines. Nothing else in it changes. Paste them just above `</head>`:
 
 ```liquid
+{% render 'dearly-head' %}
 {{ 'dearly.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'dearly.js' | asset_url }}" defer></script>
 ```
+
+`snippets/dearly-head.liquid` holds the Meta domain verification tag (`facebook-domain-verification`) and the Meta Pixel base code (pixel 29461693903447213). Upload it under Snippets, Add a new snippet, named `dearly-head`.
+
+After publishing: open givedearly.com, view the page source (Ctrl+U), search for `facebook-domain-verification`, then click Verify domain in Meta. Meta can take up to 72 hours to see it.
+
+**Do not run the pixel twice.** If the Facebook and Instagram sales channel in Shopify is also connected to this same pixel, every event counts double. Use one or the other. If you keep this snippet, delete the pixel block from it only if you later switch to the channel. Note that a theme-pasted pixel cannot see Shopify's checkout, so it fires PageView (and anything you add on store pages) but not InitiateCheckout or Purchase. The sales channel does fire those. For ads optimising on purchases, the channel is the better source.
 
 The JSON-LD is emitted by sections 3 and 17, so it stays in sync with the page and needs no block in theme.liquid.
 
