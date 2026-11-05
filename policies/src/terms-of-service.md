@@ -1,6 +1,6 @@
 # Terms of Service
 
-Paste into Shopify: Settings, Policies, Terms of service.
+Source for the policy page on givedearly.com. Run python policies/build.py after editing.
 Fill in [LEGAL ENTITY NAME], [REGISTERED ADDRESS] and [JURISDICTION] before publishing.
 
 ---

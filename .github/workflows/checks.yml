@@ -1,0 +1,70 @@
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: tools
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - name: Static checks (links, copy rules, JSON-LD, budgets, headers)
+        run: node check.mjs
+      - name: Browser checks (4 screen sizes, CSP, errors, layout)
+        run: node browser.mjs
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+      - name: Lighthouse budgets
+        run: npx lhci autorun --config=lighthouserc.json
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+      - name: Save screenshots and Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: checks-${{ github.sha }}
+          path: tools/out/
+          retention-days: 14
+
+  # Deploys only after every check passes. Turned on once these exist in the GitHub repo
+  # (Settings, Secrets and variables, Actions):
+  #   secrets CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID   and   variable CF_PAGES_PROJECT
+  # and automatic Git deployments are switched off in the Cloudflare Pages project.
+  deploy:
+    needs: checks
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.CF_PAGES_PROJECT != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build the deploy folder (site files only)
+        run: |
+          mkdir -p dist
+          rsync -a --exclude dist --exclude .git --exclude .github --exclude tools --exclude shopify-theme --exclude 'policies/src' ./ dist/
+      - name: Deploy to Cloudflare Pages
+        working-directory: dist
+        run: npx --yes wrangler@3 pages deploy . --project-name="${{ vars.CF_PAGES_PROJECT }}" --branch=main --commit-hash="${{ github.sha }}"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

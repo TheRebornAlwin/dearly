@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /shopify-theme/
+Disallow: /tools/
+Disallow: /policies/src/
+
+Sitemap: https://givedearly.com/sitemap.xml

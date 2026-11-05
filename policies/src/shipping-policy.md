@@ -1,6 +1,6 @@
 # Shipping Policy
 
-Paste into Shopify: Settings, Policies, Shipping policy.
+Source for /policies/shipping-policy. Run python policies/build.py after editing.
 
 ---
 
@@ -8,21 +8,9 @@ Paste into Shopify: Settings, Policies, Shipping policy.
 
 Shipping is free on every order, to every country we ship to. There are no thresholds and no surcharges.
 
-## Processing time
+## Delivery time
 
-Orders are processed within 1 to 3 business days. Orders placed on a weekend or public holiday begin processing the next business day.
-
-## Delivery estimates
-
-These are estimates from the date of dispatch, not the date of order. Add processing time.
-
-| Destination | Estimated delivery |
-| --- | --- |
-| United States | 7 to 12 business days |
-| Canada | 8 to 14 business days |
-| United Kingdom and EU | 8 to 14 business days |
-| Australia and New Zealand | 10 to 16 business days |
-| Rest of world | 12 to 20 business days |
+Most orders arrive within 1 to 2 weeks of the day you order, processing included. Deliveries to remote areas and some countries outside North America and Europe can take a little longer.
 
 ## Tracking
 

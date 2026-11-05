@@ -1,6 +1,6 @@
 # Refund and Return Policy
 
-Paste into Shopify: Settings, Policies, Refund policy.
+Source for the policy page on givedearly.com. Run python policies/build.py after editing.
 Fill in [LEGAL ENTITY NAME] and [REGISTERED ADDRESS] before publishing.
 
 ---

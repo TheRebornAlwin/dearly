@@ -1,6 +1,6 @@
 # Privacy Policy
 
-Paste into Shopify: Settings, Policies, Privacy policy.
+Source for the policy page on givedearly.com. Run python policies/build.py after editing.
 Fill in [LEGAL ENTITY NAME], [REGISTERED ADDRESS] and [DATE] before publishing.
 
 ---

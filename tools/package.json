@@ -1,0 +1,15 @@
+{
+  "name": "dearly-tools",
+  "private": true,
+  "type": "module",
+  "description": "Checks for the Dearly site. Not deployed.",
+  "scripts": {
+    "check": "node check.mjs",
+    "browser": "node browser.mjs",
+    "lighthouse": "lhci autorun --config=lighthouserc.json"
+  },
+  "devDependencies": {
+    "@lhci/cli": "0.14.0",
+    "puppeteer-core": "23.11.1"
+  }
+}
