@@ -318,13 +318,13 @@ button { font: inherit; color: inherit; }
 }
 
 /* Statement band: glow plus a heart that draws itself on scroll */
-.statement { position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(70% 90% at 50% 40%, rgb(122 46 46 / .32), transparent 70%), var(--ink); }
-.statement__mark { position: absolute; z-index: -1; left: 50%; top: 50%; width: min(96vw, 600px); height: auto; translate: -50% -50%; fill: none; stroke: rgb(240 178 186 / .34); stroke-width: .9; stroke-linecap: round; filter: drop-shadow(0 0 6px rgb(240 160 175 / .35)); stroke-linejoin: round; }
-.statement__echo path { stroke: rgb(240 178 186 / .16); }
+.statement { position: relative; isolation: isolate; overflow: hidden; padding-block: clamp(7rem, 5rem + 9vw, 12rem); background: radial-gradient(70% 90% at 50% 40%, rgb(122 46 46 / .32), transparent 70%), var(--ink); }
+.statement__mark { position: absolute; z-index: -1; left: 50%; top: 50%; width: min(122vw, 820px); height: auto; translate: -50% -50%; fill: none; stroke: rgb(240 168 182 / .38); stroke-width: .07; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 5px rgb(240 150 170 / .45)); }
+.statement__echo path { stroke: rgb(240 168 182 / .14); }
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-    .statement__mark { view-timeline: --mark; }
-    .statement__mark path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw-mark linear both; animation-timeline: --mark; animation-range: entry 5% entry 100%; }
+    .statement { view-timeline: --mark; }
+    .statement__mark path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw-mark linear both; animation-timeline: --mark; animation-range: entry 15% contain 35%; }
     @keyframes draw-mark { to { stroke-dashoffset: 0; } }
   }
 }
