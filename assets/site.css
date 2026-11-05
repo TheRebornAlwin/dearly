@@ -261,7 +261,10 @@ button { font: inherit; color: inherit; }
 .buy__title { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 1.5rem + 1.8vw, 2.9rem); line-height: 1.06; letter-spacing: -0.016em; text-wrap: balance; }
 .price { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem .85rem; margin-top: 1.1rem; font-variant-numeric: lining-nums tabular-nums; }
 .price__now { font-family: var(--serif); font-size: 1.9rem; line-height: 1; }
-.price__was { color: var(--ink-faded); font-size: 1.0625rem; text-decoration-thickness: 1px; }
+.price__was { color: var(--ink-faded); font-size: 1.125rem; }
+/* A thin diagonal strike instead of a line through the middle, so the old price stays readable */
+.price__was, .sticky__price s { position: relative; display: inline-block; text-decoration: none; }
+.price__was::after, .sticky__price s::after { content: ""; position: absolute; left: -3px; right: -3px; top: 52%; height: 1px; background: var(--wax); transform: rotate(-14deg); }
 .price__save { background: var(--wax); color: var(--paper-raised); font-size: 0.8125rem; font-weight: 500; letter-spacing: .04em; padding: .3rem .6rem; border-radius: var(--radius); align-self: center; }
 .buy__lede { font-family: var(--serif); font-size: clamp(1.1rem, 1rem + .4vw, 1.22rem); line-height: 1.5; margin-top: 1.4rem; text-wrap: pretty; }
 .included { margin-top: 1.6rem; border-top: 1px solid var(--rule); }
