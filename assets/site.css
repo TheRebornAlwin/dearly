@@ -317,6 +317,22 @@ button { font: inherit; color: inherit; }
   }
 }
 
+/* Statement band: soft light plus the infinity-heart mark drawing itself as you scroll */
+.statement { position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(70% 90% at 50% 40%, rgb(122 46 46 / .32), transparent 70%), var(--ink); }
+.statement__mark { position: absolute; z-index: -1; left: 50%; top: 50%; width: min(118vw, 760px); height: auto; translate: -50% -50%; fill: none; stroke: rgb(239 211 188 / .24); stroke-width: 1.2; stroke-linejoin: round; }
+.statement__mark path + path { stroke: rgb(239 211 188 / .15); }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .statement__mark { view-timeline: --mark; }
+    .statement__mark path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw-mark linear both; animation-timeline: --mark; animation-range: entry 10% contain 35%; }
+    @keyframes draw-mark { to { stroke-dashoffset: 0; } }
+  }
+}
+
+/* The words written in script on the card are picked out the same way here */
+.reading__lines em { font-style: italic; color: #F3DDC8; }
+.reading__to em { display: block; margin-top: .2rem; font-family: var(--serif); font-size: 2.6em; letter-spacing: -0.01em; text-transform: none; line-height: 1.05; }
+
 /* ---------- In the box ---------- */
 .inbox { background: linear-gradient(180deg, var(--paper) 0%, var(--paper-raised) 100%); }
 .inbox__grid { display: grid; gap: clamp(3rem, 2rem + 4vw, 4.5rem); align-items: center; }
