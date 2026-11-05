@@ -169,7 +169,7 @@
       var src = slides[cur].querySelector("img");
       var go = function () {
         stage.classList.remove("is-zoomed");
-        zImg.src = src.currentSrc.replace(/-(400|800|1200)\.(avif|jpg)$/, "-1600.$2") || src.src;
+        zImg.src = src.currentSrc.replace(/-(400|800|1200)\.(avif|jpg)(?=\?|$)/, "-1600.$2") || src.src;
         zImg.alt = src.alt;
         count.textContent = (cur + 1) + " / " + slides.length;
       };
