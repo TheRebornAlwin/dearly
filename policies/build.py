@@ -12,7 +12,7 @@ TEMPLATE = """<!doctype html>
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://givedearly.com/policies/{slug}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v=178b006876">
 </head>
 <body>
 <header class="header">

@@ -31,6 +31,10 @@ Buy then opens `https://<shop>.myshopify.com/cart/<variantId>:1`. Do not connect
 
 Source photos are the AliExpress supplier set. To rebuild or swap: `python tools/images.py <folder>`, with the mapping at the top of that script.
 
+## After editing CSS or JS
+
+Run `python tools/stamp.py`. It updates the `?v=` fingerprints on asset URLs so visitors never get a stale cached file. CI fails if you forget.
+
 ## Automatic checks
 
 `.github/workflows/checks.yml` runs on every push:
