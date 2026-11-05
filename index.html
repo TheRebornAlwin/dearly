@@ -29,7 +29,7 @@
 
 <link rel="preload" href="/assets/fonts/instrument-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" type="image/avif" imagesrcset="/images/box-card-400.avif 400w, /images/box-card-800.avif 800w, /images/box-card-1200.avif 1200w, /images/box-card-1600.avif 1600w" imagesizes="(min-width: 960px) 54vw, 100vw" fetchpriority="high">
-<link rel="stylesheet" href="/assets/site.css?v=78c0c19a21">
+<link rel="stylesheet" href="/assets/site.css?v=16350020aa">
 
 <script type="application/ld+json">
 {
@@ -84,8 +84,12 @@
 <body>
 <a class="skip" href="#buy">Skip to product</a>
 
-<div class="announce" role="note">
-  <p><span>HOLIDAY SALE: 50% OFF EVERYTHING</span><span class="announce__dot" aria-hidden="true"></span><span>FREE WORLDWIDE SHIPPING</span></p>
+<div class="announce" role="region" aria-label="Offers">
+  <ul class="announce__list" data-announce>
+    <li><em>Holiday sale</em> 50% off everything</li>
+    <li><em>Free</em> worldwide shipping</li>
+    <li data-announce-holiday hidden></li>
+  </ul>
 </div>
 
 <header class="header" data-header>
@@ -96,7 +100,7 @@
       <a href="#faq">Questions</a>
     </nav>
     <a class="wordmark" href="/" aria-label="Dearly, home">Dearly</a>
-    <a class="header__buy" href="#buy" data-buy>Buy now <span class="header__price">$49.99</span></a>
+    <a class="header__buy" href="#buy" data-buy>Buy now</a>
   </div>
 </header>
 
@@ -140,7 +144,7 @@
           <p class="deadline" data-holiday hidden></p>
 
           <a class="btn btn--buy" href="#buy" data-buy data-buy-main>
-            <span class="btn__label">Buy now</span><span class="btn__price">$49.99</span>
+            <span class="btn__label">Buy now</span>
           </a>
           <p class="eta" data-eta><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17.5" cy="17.5" r="1.6"/></svg><span>Free shipping. Arrives in 1 to 2 weeks.</span></p>
           <p class="buy__msg" data-buy-msg hidden>Checkout is being connected. To order now, email <a href="mailto:hello@givedearly.com">hello@givedearly.com</a> and we will reply the same day.</p>
@@ -189,29 +193,36 @@
   </section>
 
   <!-- In the box -->
-  <section class="section" aria-labelledby="box-h">
-    <div class="wrap">
-      <header class="section__head center" data-reveal>
-        <p class="eyebrow">In the box</p>
-        <h2 class="h2" id="box-h">Three things, already put together</h2>
-      </header>
-      <ol class="trio">
-        <li class="trio__item" data-reveal>
-          <div class="trio__img"><picture><source type="image/avif" srcset="/images/pendant-light-400.avif 400w, /images/pendant-light-800.avif 800w, /images/pendant-light-1200.avif 1200w, /images/pendant-light-1600.avif 1600w" sizes="(min-width: 768px) 30vw, 96px"><img src="/images/pendant-light-800.jpg" srcset="/images/pendant-light-400.jpg 400w, /images/pendant-light-800.jpg 800w, /images/pendant-light-1200.jpg 1200w, /images/pendant-light-1600.jpg 1600w" sizes="(min-width: 768px) 30vw, 96px" width="1600" height="1600" alt="" loading="lazy" decoding="async"></picture></div>
-          <h3>The necklace</h3>
-          <p>An infinity sign linked through a rose gold tone heart, on a fine chain, ready to wear.</p>
-        </li>
-        <li class="trio__item" data-reveal>
-          <div class="trio__img"><picture><source type="image/avif" srcset="/images/card-words-400.avif 400w, /images/card-words-800.avif 800w, /images/card-words-1200.avif 1200w, /images/card-words-1600.avif 1600w" sizes="(min-width: 768px) 30vw, 96px"><img src="/images/card-words-800.jpg" srcset="/images/card-words-400.jpg 400w, /images/card-words-800.jpg 800w, /images/card-words-1200.jpg 1200w, /images/card-words-1600.jpg 1600w" sizes="(min-width: 768px) 30vw, 96px" width="1600" height="1600" alt="" loading="lazy" decoding="async"></picture></div>
-          <h3>The card</h3>
-          <p>The words are already written, so you don’t have to find them at the last minute.</p>
-        </li>
-        <li class="trio__item" data-reveal>
-          <div class="trio__img"><picture><source type="image/avif" srcset="/images/box-gift-400.avif 400w, /images/box-gift-800.avif 800w, /images/box-gift-1200.avif 1200w, /images/box-gift-1600.avif 1600w" sizes="(min-width: 768px) 30vw, 96px"><img src="/images/box-gift-800.jpg" srcset="/images/box-gift-400.jpg 400w, /images/box-gift-800.jpg 800w, /images/box-gift-1200.jpg 1200w, /images/box-gift-1600.jpg 1600w" sizes="(min-width: 768px) 30vw, 96px" width="1600" height="1600" alt="" loading="lazy" decoding="async"></picture></div>
-          <h3>The box</h3>
-          <p>Gift-ready. Nothing to wrap, and no price anywhere in the package.</p>
-        </li>
-      </ol>
+  <section class="section inbox" aria-labelledby="box-h">
+    <div class="wrap inbox__grid">
+      <figure class="inbox__media">
+        <picture><source type="image/avif" srcset="/images/box-card-400.avif 400w, /images/box-card-800.avif 800w, /images/box-card-1200.avif 1200w, /images/box-card-1600.avif 1600w" sizes="(min-width: 900px) 52vw, 100vw"><img src="/images/box-card-800.jpg" srcset="/images/box-card-400.jpg 400w, /images/box-card-800.jpg 800w, /images/box-card-1200.jpg 1200w, /images/box-card-1600.jpg 1600w" sizes="(min-width: 900px) 52vw, 100vw" width="1600" height="1600" alt="The necklace set on its card inside the open gift box" loading="lazy" decoding="async"></picture>
+        <span class="pin pin--1" aria-hidden="true">1</span>
+        <span class="pin pin--2" aria-hidden="true">2</span>
+        <span class="pin pin--3" aria-hidden="true">3</span>
+      </figure>
+      <div class="inbox__text">
+        <header data-reveal>
+          <p class="eyebrow">In the box</p>
+          <h2 class="h2" id="box-h">Three things, already put together</h2>
+          <p class="body-serif">It arrives like this. The necklace is already set on the card and the card is already in the box, so there is nothing to assemble and nothing to wrap.</p>
+        </header>
+        <ol class="inbox__list">
+          <li class="inbox__item inbox__item--1" data-reveal>
+            <span class="inbox__num" aria-hidden="true">01</span>
+            <div><h3>The necklace</h3><p>An infinity sign linked through a rose gold tone heart, on a fine chain with an extender.</p></div>
+          </li>
+          <li class="inbox__item inbox__item--2" data-reveal>
+            <span class="inbox__num" aria-hidden="true">02</span>
+            <div><h3>The card</h3><p>Every word already written, so you don’t have to find them at the last minute.</p></div>
+          </li>
+          <li class="inbox__item inbox__item--3" data-reveal>
+            <span class="inbox__num" aria-hidden="true">03</span>
+            <div><h3>The box</h3><p>Gift-ready, with no price or invoice anywhere in the package.</p></div>
+          </li>
+        </ol>
+        <a class="link-arrow" href="#buy" data-buy>Buy now</a>
+      </div>
     </div>
   </section>
 
@@ -233,19 +244,6 @@
     <div class="worn__text" data-reveal>
       <h2 class="h2" id="worn-h">Small enough for every day. Easy to notice.</h2>
       <p>0.91 in across, sitting right at the collarbone.</p>
-    </div>
-  </section>
-
-  <!-- Ready -->
-  <section class="section" aria-labelledby="ready-h">
-    <div class="wrap split split--reverse">
-      <figure class="split__media"><picture><source type="image/avif" srcset="/images/box-gift-400.avif 400w, /images/box-gift-800.avif 800w, /images/box-gift-1200.avif 1200w, /images/box-gift-1600.avif 1600w" sizes="(min-width: 900px) 46vw, 100vw"><img src="/images/box-gift-800.jpg" srcset="/images/box-gift-400.jpg 400w, /images/box-gift-800.jpg 800w, /images/box-gift-1200.jpg 1200w, /images/box-gift-1600.jpg 1600w" sizes="(min-width: 900px) 46vw, 100vw" width="1600" height="1600" alt="The gift box open with the necklace on its card" loading="lazy" decoding="async"></picture></figure>
-      <div class="split__text" data-reveal>
-        <p class="eyebrow">How it arrives</p>
-        <h2 class="h2" id="ready-h">Nothing to wrap</h2>
-        <p class="body-serif">It arrives in a gift box with the card already inside and the necklace already set. No assembly, no wrapping paper, and no prices or invoices anywhere in the package.</p>
-        <a class="link-arrow" href="#buy" data-buy>Buy now, $49.99</a>
-      </div>
     </div>
   </section>
 
@@ -321,7 +319,7 @@
       <div class="final__text" data-reveal>
         <h2 class="display" id="final-h">Say it this year.</h2>
         <p class="lead">The necklace, the card and the box, delivered free, with 90 days to change your mind.</p>
-        <a class="btn btn--buy btn--light" href="#buy" data-buy><span class="btn__label">Buy now</span><span class="btn__price">$49.99</span></a>
+        <a class="btn btn--buy btn--light" href="#buy" data-buy><span class="btn__label">Buy now</span></a>
       </div>
     </div>
   </section>
@@ -388,6 +386,6 @@
 </div>
 
 <script src="/assets/config.js?v=d7d47f07b8"></script>
-<script src="/assets/site.js?v=774eb858cb" defer></script>
+<script src="/assets/site.js?v=3dbd64e4c3" defer></script>
 </body>
 </html>

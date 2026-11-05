@@ -122,6 +122,12 @@
       if (daysLeft >= 0 && daysLeft <= 45) {
         hol.textContent = "Order by " + fmt(cut, true) + " for delivery before " + list[i].name + ".";
         hol.hidden = false;
+        var annHol = doc.querySelector("[data-announce-holiday]");
+        if (annHol) {
+          annHol.innerHTML = "<em>Order by " + fmt(cut) + "</em> for " + list[i].name;
+          annHol.hidden = false;
+          annHol.parentNode.classList.add("is-3");
+        }
         break;
       }
     }

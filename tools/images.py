@@ -39,27 +39,17 @@ for name, rel in PHOTOS.items():
     for w in WIDTHS:
         if w > im.width * 1.3: continue  # allow a small upscale so every srcset width exists
         r = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
-        r.save(OUT / f"{name}-{w}.avif", quality=58, speed=4)
-        r.save(OUT / f"{name}-{w}.jpg", quality=80, optimize=True, progressive=True)
+        r.save(OUT / f"{name}-{w}.avif", quality=82, subsampling="4:4:4", speed=4)
+        r.save(OUT / f"{name}-{w}.jpg", quality=88, subsampling=0, optimize=True, progressive=True)
     print("built", name)
 
 # Desktop-only wide banner for the worn section (its own aspect ratio, never cropped).
 im = grade(Image.open(SRC / "dearly/worn-wide.png").convert("RGB"))
 for w in [800, 1200, 1600, im.width]:
     r = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
-    r.save(OUT / f"worn-wide-{w}.avif", quality=62, speed=4)
-    r.save(OUT / f"worn-wide-{w}.jpg", quality=84, optimize=True, progressive=True)
+    r.save(OUT / f"worn-wide-{w}.avif", quality=82, subsampling="4:4:4", speed=4)
+    r.save(OUT / f"worn-wide-{w}.jpg", quality=88, subsampling=0, optimize=True, progressive=True)
 print("built worn-wide")
-
-# Close crop of the card's words, for the "The card" tile.
-c = grade(Image.open(SRC / PHOTOS["card"]).convert("RGB"))
-W, H = c.size
-c = c.crop((int(W * .27), int(H * .26), int(W * .87), int(H * .86)))
-for w in WIDTHS:  # every width, so the srcset in index.html always resolves
-    r = c.resize((w, w), Image.LANCZOS)
-    r.save(OUT / f"card-words-{w}.avif", quality=60, speed=4)
-    r.save(OUT / f"card-words-{w}.jpg", quality=82, optimize=True, progressive=True)
-print("built card-words")
 
 # Share image for Meta and messaging apps (they ignore SVG and AVIF).
 hero = grade(Image.open(SRC / PHOTOS["box-card"]).convert("RGB"))
