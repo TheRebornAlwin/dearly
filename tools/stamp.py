@@ -9,7 +9,7 @@ photo is fetched fresh instead of the browser or Cloudflare showing the old cach
 import hashlib, pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-ASSETS = ["assets/site.css", "assets/site.js", "assets/config.js"]
+ASSETS = ["assets/site.css", "assets/site.js", "assets/config.js", "assets/reviews.js"]
 SKIP = {"shopify-theme", "tools", "node_modules", ".git", "functions"}
 CR = bytes([13])
 

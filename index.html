@@ -29,7 +29,7 @@
 
 <link rel="preload" href="/assets/fonts/instrument-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" type="image/avif" imagesrcset="/images/box-card-400.avif?v=846513f6 400w, /images/box-card-800.avif?v=846513f6 800w, /images/box-card-1200.avif?v=846513f6 1200w, /images/box-card-1600.avif?v=846513f6 1600w" imagesizes="(min-width: 960px) 54vw, 100vw" fetchpriority="high">
-<link rel="stylesheet" href="/assets/site.css?v=c04fd7527a">
+<link rel="stylesheet" href="/assets/site.css?v=0b2946bfed">
 
 <script type="application/ld+json">
 {
@@ -126,6 +126,7 @@
           <p class="eyebrow">For her, from you</p>
           <h1 class="buy__title" id="title">To My Beautiful Girlfriend Infinity Heart Necklace</h1>
 
+          <a class="rating" href="#reviews" data-rating hidden><span class="stars" data-stars aria-hidden="true">★★★★★</span><span data-rating-text></span></a>
           <p class="price">
             <span class="sr">Price</span>
             <span class="price__now">$49.99</span>
@@ -162,7 +163,7 @@
 
   <!-- Statement -->
   <section class="statement" aria-labelledby="statement-h">
-    <svg class="statement__mark" viewBox="-100 -90 200 180" aria-hidden="true" focusable="false"><path pathLength="1" d="M0 70 C-60 25 -90 -10 -60 -40 C-35 -65 -5 -50 0 -25 C5 -50 35 -65 60 -40 C90 -10 60 25 0 70 Z"/><path pathLength="1" d="M-40 10 C-40 -15 -5 -15 0 10 C5 35 40 35 40 10 C40 -15 5 -15 0 10 C-5 35 -40 35 -40 10 Z"/></svg>
+    <svg class="statement__mark" viewBox="-100 -90 200 170" aria-hidden="true" focusable="false"><path pathLength="1" d="M0 -46 C -6 -62 -22 -74 -42 -74 C -66 -74 -86 -56 -86 -30 C -86 8 -30 40 0 66"/><path pathLength="1" d="M0 -46 C 6 -62 22 -74 42 -74 C 66 -74 86 -56 86 -30 C 86 8 30 40 0 66"/><g class="statement__echo" transform="translate(0 4) scale(.86)"><path pathLength="1" d="M0 -46 C -6 -62 -22 -74 -42 -74 C -66 -74 -86 -56 -86 -30 C -86 8 -30 40 0 66"/><path pathLength="1" d="M0 -46 C 6 -62 22 -74 42 -74 C 66 -74 86 -56 86 -30 C 86 8 30 40 0 66"/></g></svg>
     <div class="wrap wrap--narrow center">
       <h2 class="display" id="statement-h" data-reveal>The gift that says what you’ve been trying to say.</h2>
       <p class="lead" data-reveal>You know how you feel about her. Getting it into words is the hard part. So the card says it, and you get to watch her read it.</p>
@@ -189,7 +190,6 @@
           <p>You are my life, my love, and my best friend.</p>
           <p class="reading__end"><em>I love you, forever and always.</em></p>
         </blockquote>
-        <p class="reading__note">Give her a minute with it.</p>
       </div>
     </div>
   </section>
@@ -249,6 +249,22 @@
     </div>
   </section>
 
+  <!-- Reviews: filled from assets/reviews.js, hidden while it is empty -->
+  <section class="section reviews" id="reviews" aria-labelledby="reviews-h" data-reviews hidden>
+    <div class="wrap">
+      <header class="reviews__head" data-reveal>
+        <p class="eyebrow">Reviews</p>
+        <h2 class="h2" id="reviews-h">What they said after</h2>
+        <div class="reviews__score">
+          <span class="reviews__avg" data-reviews-avg></span>
+          <span class="reviews__meta"><span class="stars stars--lg" data-stars aria-hidden="true">★★★★★</span><span data-reviews-count></span></span>
+        </div>
+      </header>
+      <div class="reviews__grid" data-reviews-grid></div>
+      <div class="reviews__foot"><button type="button" class="btn btn--ghost reviews__more" data-reviews-more hidden>Show more reviews</button></div>
+    </div>
+  </section>
+
   <!-- Specs -->
   <section class="section section--raised" id="details" aria-labelledby="specs-h">
     <div class="wrap split">
@@ -276,19 +292,6 @@
       <h2 class="h2" id="g-h">90 days to change your mind</h2>
       <p class="lead">If she doesn’t love it, email us any time in the next 90 days and you get every cent back. We won’t ask why.</p>
       <p class="body-serif muted">Honestly, if it doesn’t land, you shouldn’t have to pay for it.</p>
-    </div>
-  </section>
-
-  <!-- Founder -->
-  <section class="section section--raised founder" aria-labelledby="f-h">
-    <div class="wrap wrap--narrow">
-      <div class="letter" data-reveal>
-        <h2 class="h2 center" id="f-h">Why we started with a card</h2>
-        <p>Dearly is new. We don’t have ten thousand reviews yet, and we’re not going to fake them.</p>
-        <p>Here’s why we started. Picking a present was never the hard part. Saying the thing was. The actual words, out loud, to her face. So we put them in the box.</p>
-        <p>If that sounds like you, you’re in the right place. Got a question? Email <a href="mailto:hello@givedearly.com">hello@givedearly.com</a>. A real person answers it.</p>
-        <p class="letter__sign">The Dearly team</p>
-      </div>
     </div>
   </section>
 
@@ -384,7 +387,8 @@
   </div>
 </div>
 
+<script src="/assets/reviews.js?v=dfccc337ac"></script>
 <script src="/assets/config.js?v=d7d47f07b8"></script>
-<script src="/assets/site.js?v=0268fad571" defer></script>
+<script src="/assets/site.js?v=bfbf215bf4" defer></script>
 </body>
 </html>

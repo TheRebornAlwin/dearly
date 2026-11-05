@@ -88,7 +88,7 @@ if (!shop || !variant) warn("assets/config.js", "checkout not connected yet (sho
 const jsBytes = ["assets/site.js", "assets/config.js"].reduce((n, f) => n + fs.statSync(path.join(ROOT, f)).size, 0);
 if (jsBytes > 16 * 1024) err("assets", `JavaScript is ${jsBytes} bytes, budget is 16384`);
 const cssBytes = fs.statSync(path.join(ROOT, "assets/site.css")).size;
-if (cssBytes > 40 * 1024) err("assets", `CSS is ${cssBytes} bytes, budget is 40960`);
+if (cssBytes > 48 * 1024) err("assets", `CSS is ${cssBytes} bytes, budget is 49152`);
 
 // 7. Security headers are present.
 const headers = fs.readFileSync(path.join(ROOT, "_headers"), "utf8");

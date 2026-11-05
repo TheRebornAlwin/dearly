@@ -133,6 +133,52 @@
     }
   }
 
+  /* ---------- Reviews: only real ones, from assets/reviews.js ---------- */
+  var R = win.DEARLY_REVIEWS || {};
+  var items = (R.items || []).filter(function (r) { return r && r.text; });
+  var setStars = function (el, v) { if (el) el.style.setProperty("--pct", Math.max(0, Math.min(5, v)) / 5 * 100 + "%"); };
+  if (R.average && R.count) {
+    var avg = Number(R.average).toFixed(1), cnt = Number(R.count).toLocaleString("en-US");
+    var rating = doc.querySelector("[data-rating]");
+    if (rating) {
+      setStars(rating.querySelector("[data-stars]"), R.average);
+      var rt = rating.querySelector("[data-rating-text]");
+      rt.textContent = ""; var st = doc.createElement("strong"); st.textContent = avg; rt.appendChild(st);
+      rt.appendChild(doc.createTextNode(" from " + cnt + " reviews"));
+      rating.setAttribute("aria-label", "Rated " + avg + " out of 5 from " + cnt + " reviews");
+      rating.hidden = false;
+    }
+  }
+  var revSec = doc.querySelector("[data-reviews]");
+  if (revSec && items.length) {
+    var grid = revSec.querySelector("[data-reviews-grid]"), more = revSec.querySelector("[data-reviews-more]");
+    var avgEl = revSec.querySelector("[data-reviews-avg]"), cntEl = revSec.querySelector("[data-reviews-count]");
+    var a = R.average || items.reduce(function (s, r) { return s + (r.rating || 5); }, 0) / items.length;
+    avgEl.textContent = Number(a).toFixed(1);
+    setStars(revSec.querySelector(".reviews__score [data-stars]"), a);
+    cntEl.textContent = (R.count || items.length).toLocaleString("en-US") + " reviews";
+    var shown = 0, PAGE = win.matchMedia && win.matchMedia("(max-width: 699px)").matches ? 4 : 9;
+    var card = function (r) {
+      var el = doc.createElement("article"); el.className = "review";
+      var s = doc.createElement("span"); s.className = "stars"; s.textContent = "★★★★★"; s.setAttribute("role", "img");
+      s.setAttribute("aria-label", (r.rating || 5) + " out of 5 stars"); setStars(s, r.rating || 5); el.appendChild(s);
+      var p = doc.createElement("p"); p.className = "review__text"; p.textContent = r.text; el.appendChild(p);
+      var by = doc.createElement("p"); by.className = "review__by";
+      var n = doc.createElement("span"); n.className = "review__name"; n.textContent = r.name || "Customer"; by.appendChild(n);
+      if (r.verified) { var v = doc.createElement("span"); v.className = "review__verified"; v.textContent = "Verified buyer"; by.appendChild(v); }
+      el.appendChild(by);
+      return el;
+    };
+    var page = function () {
+      var f = doc.createDocumentFragment();
+      items.slice(shown, shown + PAGE).forEach(function (r) { f.appendChild(card(r)); });
+      grid.appendChild(f); shown = Math.min(items.length, shown + PAGE);
+      more.hidden = shown >= items.length;
+    };
+    more.addEventListener("click", page);
+    page(); revSec.hidden = false;
+  }
+
   /* ---------- Gallery: dots on mobile, viewer everywhere ---------- */
   var gal = doc.querySelector("[data-gallery]");
   var slides = gal ? [].slice.call(gal.querySelectorAll(".gallery__slide")) : [];
