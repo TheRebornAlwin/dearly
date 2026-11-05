@@ -301,6 +301,10 @@ An exclusive accordion (`<details name="faq">`, so only one is open at a time) w
 
 The FAQ data that Google reads (FAQPage JSON-LD) matches the visible questions exactly.
 
+### Reviews (`#reviews`)
+- "What they said after", with the 4.9 average and "16 reviews". Cards in a masonry grid: stars, the review word for word, the first name. 9 shown on desktop, 4 on phones, then "Show more reviews".
+- The reviews are real buyers, confirmed by the client. **No "Verified buyer" badge**: the owner thinks it looks weird.
+
 ### Final call
 Burgundy background with a soft light. "Say it this year." / "You already know what you want to tell her. This just gets it into her hands." Light Buy button. Rose-toned pendant photo.
 
@@ -528,6 +532,7 @@ During design work, every change was also checked visually:
 | `dafd600` | Nov 5 | **Diagonal strike** on $99.99 so the 9s stay readable. |
 | `0e8de9e` | Nov 5 | Pink heart line art (first version). In the box flipped (text left, photo right). Pin numbers centred. Founder letter and "Give her a minute" removed. Reviews section built. CSS budget 40 → 48 KB. |
 | `80ea476` | Nov 5 | **Statement heart redrawn** from the classic heart curve, framing the text, timed to the section, verified frame by frame with Playwright. |
+| `eb81698` | Nov 5 | **16 real customer reviews** from the client added to `assets/reviews.js`, word for word (14 five-star, 2 four-star, 4.9 average). The rating line above the price and the Reviews section now show. No "Verified buyer" badge, at the owner's request. |
 
 **The makeover (`3390492`):**
 - **Photos and facts:**
