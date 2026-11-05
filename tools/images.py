@@ -4,7 +4,9 @@
 
 Reads the mapping below (output name -> source file inside the folder), and writes
 images/<name>-<width>.avif and images/<name>-<width>.jpg at each width, plus the
-1200x630 share image and the touch icon. Re-run it whenever a photo changes.
+1200x630 share image and the icons. Re-run it whenever a photo changes.
+The folder holds the AliExpress supplier set plus a dearly/ subfolder with our own
+edits: box-card.png (main photo), worn-wide.png (desktop worn banner), icon.png.
 Needs Pillow 11.3+ (built with AVIF support)."""
 import sys, pathlib
 from PIL import Image, ImageEnhance, ImageOps
@@ -14,7 +16,7 @@ OUT = pathlib.Path(__file__).resolve().parent.parent / "images"
 WIDTHS = [400, 800, 1200, 1600]
 
 PHOTOS = {
-    "box-card":       "main_images/1.jpeg",
+    "box-card":       "dearly/box-card.png",
     "pendant-red":    "main_images/3.jpeg",
     "worn":           "main_images/6.jpeg",
     "pendant-chain":  "main_images/2.jpeg",
@@ -35,11 +37,19 @@ OUT.mkdir(exist_ok=True)
 for name, rel in PHOTOS.items():
     im = grade(ImageOps.exif_transpose(Image.open(SRC / rel)).convert("RGB"))
     for w in WIDTHS:
-        if w > im.width: continue
+        if w > im.width * 1.3: continue  # allow a small upscale so every srcset width exists
         r = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
         r.save(OUT / f"{name}-{w}.avif", quality=58, speed=4)
         r.save(OUT / f"{name}-{w}.jpg", quality=80, optimize=True, progressive=True)
     print("built", name)
+
+# Desktop-only wide banner for the worn section (its own aspect ratio, never cropped).
+im = grade(Image.open(SRC / "dearly/worn-wide.png").convert("RGB"))
+for w in [800, 1200, 1600, im.width]:
+    r = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
+    r.save(OUT / f"worn-wide-{w}.avif", quality=62, speed=4)
+    r.save(OUT / f"worn-wide-{w}.jpg", quality=84, optimize=True, progressive=True)
+print("built worn-wide")
 
 # Close crop of the card's words, for the "The card" tile.
 c = grade(Image.open(SRC / PHOTOS["card"]).convert("RGB"))
@@ -58,8 +68,10 @@ h = hero.resize((630, 630), Image.LANCZOS)
 og.paste(h, (285, 0))
 og.save(OUT / "og.jpg", quality=86, optimize=True)
 
-# Apple touch icon from the pendant shot.
-p = grade(Image.open(SRC / PHOTOS["pendant-light"]).convert("RGB"))
-c = p.crop((p.width * 0.2, p.height * 0.35, p.width * 0.8, p.height * 0.95)).resize((180, 180), Image.LANCZOS)
-c.save(OUT.parent / "apple-touch-icon.png", optimize=True)
-print("built og.jpg and apple-touch-icon.png")
+# Icons from the "d" mark: favicon.ico (16/32/48), a 192 PNG for modern browsers, Apple touch icon.
+ROOT = OUT.parent
+icon = Image.open(SRC / "dearly/icon.png").convert("RGB")
+icon.resize((48, 48), Image.LANCZOS).save(ROOT / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)])
+icon.resize((192, 192), Image.LANCZOS).save(ROOT / "favicon.png", optimize=True)
+icon.resize((180, 180), Image.LANCZOS).save(ROOT / "apple-touch-icon.png", optimize=True)
+print("built og.jpg, favicon.ico, favicon.png and apple-touch-icon.png")

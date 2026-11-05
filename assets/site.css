@@ -329,15 +329,20 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Worn, full-bleed ---------- */
 .worn { position: relative; overflow: hidden; background: var(--paper-deep); color: var(--paper-raised); }
-.worn__media img { width: 100%; height: min(92svh, 125vw); object-fit: cover; object-position: 50% 90%; }
-@media (max-width: 767px) {
-  .worn__media img { height: auto; aspect-ratio: 1; object-position: 50% 50%; }
-  .worn__text { position: static; background: var(--night); padding: 2.5rem var(--gutter) 3rem; }
-}
+.worn__media img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
 .worn__text { position: absolute; left: 0; right: 0; bottom: 0; padding: 8rem var(--gutter) clamp(2rem, 1rem + 4vw, 4.5rem); background: linear-gradient(to top, rgb(21 25 30 / .66), rgb(21 25 30 / .3) 55%, transparent); text-align: center; }
 .worn__text .h2 { max-width: 40rem; margin-inline: auto; text-shadow: 0 2px 30px rgb(0 0 0 / .25); }
 .worn__text p { margin-top: .9rem; font-size: 1rem; color: color-mix(in srgb, var(--paper-raised) 88%, transparent); }
-@media (prefers-reduced-motion: no-preference) {
+/* Desktop gets its own wide photo (worn-wide), shown at its natural ratio so it is never cropped or zoomed. */
+@media (min-width: 768px) {
+  .worn__media img { aspect-ratio: 1886 / 834; }
+}
+/* Phones and tablets: the words sit on a band below the photo so they never cover the necklace. */
+@media (max-width: 1099px) {
+  .worn__text { position: static; background: var(--night); padding: 2.5rem var(--gutter) 3rem; }
+  .worn__text .h2 { text-shadow: none; }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 767px) {
   @supports (animation-timeline: view()) {
     .worn__media img { animation: settle-in linear both; animation-timeline: view(); animation-range: entry 0% cover 60%; }
     @keyframes settle-in { from { transform: scale(1.14); } to { transform: scale(1); } }
