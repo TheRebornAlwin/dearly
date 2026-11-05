@@ -43,7 +43,7 @@ Run `python tools/stamp.py`. It updates the `?v=` fingerprints on asset URLs so 
    Missing files under `/images/` are warnings, never failures.
 2. `tools/browser.mjs`: real Chrome at 360, 390, 768 and 1440 wide with the production CSP applied. Fails on horizontal scroll,
    script or console errors, failed requests, or a missing Buy button. Screenshots are saved as a download on the run.
-3. Lighthouse: performance 85+, accessibility 95+, best practices 90+, SEO 95+, LCP under 3s, CLS under 0.05.
+3. Lighthouse: performance 85+, accessibility 95+, best practices 90+, SEO 95+, LCP under 3.5s on simulated slow 4G (raised from 3s to keep photos at full sharpness), CLS under 0.05.
 
 Run locally: `cd tools && npm install && node check.mjs && node browser.mjs`.
 

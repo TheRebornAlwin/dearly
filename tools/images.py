@@ -15,6 +15,8 @@ SRC = pathlib.Path(sys.argv[1])
 OUT = pathlib.Path(__file__).resolve().parent.parent / "images"
 WIDTHS = [400, 800, 1200, 1600]
 
+ONLY = set(sys.argv[2:])  # optional: rebuild just these names
+
 PHOTOS = {
     "box-card":       "dearly/box-card.png",
     "pendant-red":    "main_images/3.jpeg",
@@ -35,11 +37,14 @@ def grade(im):
 
 OUT.mkdir(exist_ok=True)
 for name, rel in PHOTOS.items():
+    if ONLY and name not in ONLY: continue
     im = grade(ImageOps.exif_transpose(Image.open(SRC / rel)).convert("RGB"))
     for w in WIDTHS:
         if w > im.width * 1.3: continue  # allow a small upscale so every srcset width exists
         r = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
-        r.save(OUT / f"{name}-{w}.avif", quality=82, subsampling="4:4:4", speed=4)
+        # The main photo is the first thing that loads, so it trades a hair of detail for speed.
+        q, sub = (74, "4:2:0") if name == "box-card" else (82, "4:4:4")
+        r.save(OUT / f"{name}-{w}.avif", quality=q, subsampling=sub, speed=4)
         r.save(OUT / f"{name}-{w}.jpg", quality=88, subsampling=0, optimize=True, progressive=True)
     print("built", name)
 
@@ -50,6 +55,11 @@ for w in [800, 1200, 1600, im.width]:
     r.save(OUT / f"worn-wide-{w}.avif", quality=82, subsampling="4:4:4", speed=4)
     r.save(OUT / f"worn-wide-{w}.jpg", quality=88, subsampling=0, optimize=True, progressive=True)
 print("built worn-wide")
+
+# Tiny thumbnail for the sticky Buy bar (shown at 44px, so 132px covers 3x screens).
+th = grade(Image.open(SRC / PHOTOS["box-card"]).convert("RGB")).resize((132, 132), Image.LANCZOS)
+th.save(OUT / "thumb-132.avif", quality=70, speed=4)
+th.save(OUT / "thumb-132.jpg", quality=86, optimize=True)
 
 # Share image for Meta and messaging apps (they ignore SVG and AVIF).
 hero = grade(Image.open(SRC / PHOTOS["box-card"]).convert("RGB"))
