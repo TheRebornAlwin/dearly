@@ -318,6 +318,17 @@ Burgundy background with a soft light. "Say it this year." / "You already know w
 - "Give her a minute with it." under the card, at the owner's request.
 - "The necklace is set right on the card, so she reads it the moment she opens the box." The owner called it stating the obvious.
 
+### Phones (Nov 7)
+Most traffic is Meta ads on phones, so the page was tuned for a thumb:
+- **Buy button moved up.** On phones it now comes straight after the price and the holiday date; "What's included" and the trust row follow it. Desktop order is unchanged.
+- **One Buy button at a time.** The header tucks away while you scroll down and slides back the moment you scroll up. The header's Buy now steps aside while the bottom bar is up. The bottom bar now hides when the closing "Say it this year" section arrives, so it never covers that button or the footer.
+- **Reviews swipe.** On phones the reviews are a sideways row with the next card peeking in, and all 16 are one flick away instead of four plus "Show more". A thin burgundy progress line tracks the swipe, and each card settles forward as it slides in.
+- **Hover effects driven by scroll on touch screens.** The In the box lines underline themselves as they reach the middle of the screen; spec labels light up in turn; the product photo you swipe away eases back as the next one slides over it.
+- **Tighter rhythm.** Section padding 3.9rem on phones (was 4.5rem) and the specs stay in two columns down to 340 px, which roughly halves their height.
+- **Touch feel.** No grey tap flash; buttons, questions and links give their own pressed state; Buy gives a tiny haptic tick on Android.
+- Gallery slides use `overflow: clip` instead of `hidden`. Hidden makes each slide its own scroll container, which silently breaks the swipe-linked effect.
+- Page height on a 390 px phone went from 11,463 px to about 10,200 px.
+
 ---
 
 ## 10. Design system
@@ -533,6 +544,7 @@ During design work, every change was also checked visually:
 | `0e8de9e` | Nov 5 | Pink heart line art (first version). In the box flipped (text left, photo right). Pin numbers centred. Founder letter and "Give her a minute" removed. Reviews section built. CSS budget 40 → 48 KB. |
 | `80ea476` | Nov 5 | **Statement heart redrawn** from the classic heart curve, framing the text, timed to the section, verified frame by frame with Playwright. |
 | `eb81698` | Nov 5 | **16 real customer reviews** from the client added to `assets/reviews.js`, word for word (14 five-star, 2 four-star, 4.9 average). The rating line above the price and the Reviews section now show. No "Verified buyer" badge, at the owner's request. |
+| (this commit) | Nov 7 | **Phone pass**: Buy button right after the price, header tucks on scroll, one Buy button at a time, swipeable reviews with progress line, scroll-driven stand-ins for hover effects, tighter spacing, touch feedback. See section 9, Phones. |
 
 **The makeover (`3390492`):**
 - **Photos and facts:**

@@ -76,6 +76,7 @@
     var b = e.target.closest("[data-buy]");
     if (!b) return;
     e.preventDefault();
+    try { if (navigator.vibrate) navigator.vibrate(8); } catch (x) {} // a light tick under the thumb (Android)
     if (checkoutUrl) {
       if (b.classList.contains("btn")) {
         b.classList.add("is-loading");
@@ -157,7 +158,7 @@
     avgEl.textContent = Number(a).toFixed(1);
     setStars(revSec.querySelector(".reviews__score [data-stars]"), a);
     cntEl.textContent = (R.count || items.length).toLocaleString("en-US") + " reviews";
-    var shown = 0, PAGE = win.matchMedia && win.matchMedia("(max-width: 699px)").matches ? 4 : 9;
+    var shown = 0, PAGE = win.matchMedia("(max-width: 699px)").matches ? items.length : 9; // phones swipe through all of them
     var card = function (r) {
       var el = doc.createElement("article"); el.className = "review";
       var s = doc.createElement("span"); s.className = "stars"; s.textContent = "★★★★★"; s.setAttribute("role", "img");
@@ -248,16 +249,35 @@
     dlg.addEventListener("close", function () { if (opener) opener.focus(); });
   }
 
-  /* ---------- Sticky buy bar ---------- */
-  var main = doc.querySelector("[data-buy-main]"), bar = doc.querySelector("[data-sticky]");
+  /* ---------- Sticky buy bar: up between the main Buy button and the closing one ---------- */
+  var main = doc.querySelector("[data-buy-main]"), bar = doc.querySelector("[data-sticky]"), endSec = doc.querySelector(".final");
   if (main && bar && "IntersectionObserver" in win) {
-    var barBtn = bar.querySelector("a");
-    new IntersectionObserver(function (en) {
-      var vis = !en[0].isIntersecting && en[0].boundingClientRect.top < 0;
+    var barBtn = bar.querySelector("a"), pastMain = false, atEnd = false;
+    var setBar = function () {
+      var vis = pastMain && !atEnd;
       bar.classList.toggle("is-visible", vis);
+      root.classList.toggle("has-sticky", vis);
       bar.setAttribute("aria-hidden", vis ? "false" : "true");
       if (barBtn) barBtn.tabIndex = vis ? 0 : -1;
-    }).observe(main);
+    };
+    new IntersectionObserver(function (en) { pastMain = !en[0].isIntersecting && en[0].boundingClientRect.top < 0; setBar(); }).observe(main);
+    if (endSec) new IntersectionObserver(function (en) { atEnd = en[0].isIntersecting || en[0].boundingClientRect.top < 0; setBar(); }).observe(endSec);
+  }
+
+  /* ---------- Phones: the header tucks away while reading down, and comes back the moment you scroll up ---------- */
+  var hdr = doc.querySelector("[data-header]"), narrow = win.matchMedia("(max-width: 959px)");
+  if (hdr) {
+    var lastY = win.scrollY, tick = false;
+    win.addEventListener("scroll", function () {
+      if (tick) return; tick = true;
+      requestAnimationFrame(function () {
+        tick = false;
+        var y = win.scrollY, d = y - lastY;
+        if (Math.abs(d) < 8) return;
+        hdr.classList.toggle("is-tucked", narrow.matches && d > 0 && y > 480);
+        lastY = y;
+      });
+    }, { passive: true });
   }
 
   /* ---------- Light on the card follows the pointer (desktop only) ---------- */
