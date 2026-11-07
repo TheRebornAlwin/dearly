@@ -552,7 +552,7 @@ During design work, every change was also checked visually:
 | `dafd600` | Nov 5 | **Diagonal strike** on $99.99 so the 9s stay readable. |
 | `0e8de9e` | Nov 5 | Pink heart line art (first version). In the box flipped (text left, photo right). Pin numbers centred. Founder letter and "Give her a minute" removed. Reviews section built. CSS budget 40 → 48 KB. |
 | `80ea476` | Nov 5 | **Statement heart redrawn** from the classic heart curve, framing the text, timed to the section, verified frame by frame with Playwright. |
-| `eb81698` | Nov 5 | **16 real customer reviews** from the client added to `assets/reviews.js`, word for word (14 five-star, 2 four-star, 4.9 average). The rating line above the price and the Reviews section now show. No "Verified buyer" badge, at the owner's request. |
+| `eb81698` | Nov 5 | **16 real customer reviews** from the client added to `assets/reviews.js`, word for word (14 five-star, 2 four-star). Count shown is the store-wide 1,047 the client reported; the 16 are the ones she chose to feature. The rating line above the price and the Reviews section now show. No "Verified buyer" badge, at the owner's request. |
 | (this commit) | Nov 7 | **Phone pass**: Buy button right after the price, header tucks on scroll, one Buy button at a time, swipeable reviews with progress line, scroll-driven stand-ins for hover effects, tighter spacing, touch feedback. See section 9, Phones. |
 
 **The makeover (`3390492`):**

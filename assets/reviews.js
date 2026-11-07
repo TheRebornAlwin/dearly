@@ -4,7 +4,7 @@
    average and count are the store-wide totals from wherever the reviews live (for example a Shopify review app). */
 window.DEARLY_REVIEWS = {
   average: 4.875,
-  count: 16,
+  count: 1047,
   items: [
     { name: "Oliver M.", rating: 5, text: "Got this for my girlfriend's birthday and she actually teared up reading the card. I'm not a card guy, I never know what to write, so having it already done was honestly a lifesaver. Chain feels and looks nice according to her, and she’s worn it every day since." },
     { name: "Hannah", rating: 4, text: "its cute!! The heart is a little bit smaller than I expected from the pics but it sparkles nice in the light and still looks great on me." },
