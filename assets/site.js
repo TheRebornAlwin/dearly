@@ -100,28 +100,37 @@
   });
 
   /* ---------- Delivery window and holiday cutoff, computed from today ---------- */
-  var fmt = function (d, wd) {
-    try { return d.toLocaleDateString("en-US", wd ? { weekday: "short", month: "short", day: "numeric" } : { month: "short", day: "numeric" }); }
-    catch (e) { return d.toDateString().slice(4, 10); }
+  var fmt = function (d, wd) { // dates never split across two lines
+    var t;
+    try { t = d.toLocaleDateString("en-US", wd ? { weekday: "short", month: "short", day: "numeric" } : { month: "short", day: "numeric" }); }
+    catch (e) { t = d.toDateString().slice(4, 10); }
+    return t.replace(/ /g, " ");
   };
   var today = new Date(); today.setHours(12, 0, 0, 0);
   var addDays = function (d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; };
   var eta = doc.querySelector("[data-eta] span");
-  if (eta) eta.innerHTML = "Free shipping. Order today, arrives <strong>" + fmt(addDays(today, SHIP_MIN)) + " to " + fmt(addDays(today, SHIP_MAX)) + "</strong>.";
+  if (eta) {
+    var e1 = addDays(today, SHIP_MIN), e2 = addDays(today, SHIP_MAX);
+    var e2s = e1.getMonth() === e2.getMonth() ? String(e2.getDate()) : fmt(e2); // "Nov 14 to 21", or "Nov 28 to Dec 5"
+    eta.innerHTML = "Free shipping, arrives <strong>" + fmt(e1) + " to " + e2s + "</strong>";
+  }
 
   var hol = doc.querySelector("[data-holiday]");
   if (hol) {
     var y = today.getFullYear(), list = [];
     [y, y + 1].forEach(function (yr) {
+      // Thanksgiving: fourth Thursday of November. Cutoff is our own 1 to 2 week promise plus a day, so it arrives the day before.
+      var tg = new Date(yr, 10, 1, 12); tg.setDate(1 + (4 - tg.getDay() + 7) % 7 + 21);
+      list.push({ name: "Thanksgiving", date: tg, margin: SHIP_MAX + 1 });
       list.push({ name: "Christmas", date: new Date(yr, 11, 25, 12) });
       list.push({ name: "Valentine’s Day", date: new Date(yr, 1, 14, 12) });
     });
     list.sort(function (a, b) { return a.date - b.date; });
     for (var i = 0; i < list.length; i++) {
-      var cut = addDays(list[i].date, -HOLIDAY_MARGIN);
+      var cut = addDays(list[i].date, -(list[i].margin || HOLIDAY_MARGIN));
       var daysLeft = Math.round((cut - today) / 864e5);
       if (daysLeft >= 0 && daysLeft <= 45) {
-        hol.textContent = "Order by " + fmt(cut, true) + " for delivery before " + list[i].name + ".";
+        hol.textContent = "Order by " + fmt(cut, true) + " for " + list[i].name;
         hol.hidden = false;
         var annHol = doc.querySelector("[data-announce-holiday]");
         if (annHol) {

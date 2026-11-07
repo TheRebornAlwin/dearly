@@ -329,6 +329,12 @@ Most traffic is Meta ads on phones, so the page was tuned for a thumb:
 - Gallery slides use `overflow: clip` instead of `hidden`. Hidden makes each slide its own scroll container, which silently breaks the swipe-linked effect.
 - Page height on a 390 px phone went from 11,463 px to about 10,200 px.
 - **Main photo never cropped (Nov 7).** An old `max-height: 50svh` plus `object-fit: cover` cut the top and bottom off the first photo on most phones. Now the photo is always the whole square: edge to edge on portrait phones; on landscape phones and tablets its size is capped by the screen height (`100svh` minus header and banner) and it is centred.
+- **Centred on phones (Nov 7).** Below 900 px (960 px for the buy box) headings and paragraphs are centred: buy box, card reading (the lines now mirror the centred physical card), In the box (numbers stack above each item), meaning, specs heading, reviews heading, FAQ intro, footer. Lists that read better left stay left: what's included, the specs table, FAQ questions, review cards.
+- **Bottom bar flush on iPhone.** Safe-area padding is now `max(.7rem, env(safe-area-inset-bottom))` instead of adding both, and the bar's surface continues 120 px below itself so no strip of page shows under it behind Safari's floating toolbar.
+- **Delivery line** shortened to "Free shipping, arrives Nov 14 to 21" (one line down to 320 px). **Holiday line** is "Order by Wed, Nov 11 for Thanksgiving", the dot travels with the centred text, and dates use non-breaking spaces so they never split.
+- **Thanksgiving** added to the holiday countdown (fourth Thursday of November). Its cutoff is 15 days before (our 1 to 2 week promise plus a day), not the 21 used for Christmas and Valentine's, because 21 had already passed. After Nov 11 the banner and buy box switch to Christmas automatically. Note: the shipping policy still recommends three weeks of margin.
+- Banner reads "Holiday Sale".
+- WebKit (Safari 26 engine) via Playwright is used for iPhone checks, alongside Chrome.
 - **44 px tap targets** on touch screens for footer links, the rating link and header links, without changing how they look.
 - **Device audit:** 17 sizes checked for horizontal scroll, off-screen or clipped text, cropped photos, the first photo running off screen, and small tap targets: iPhone SE 1 and 3, mini, 14, 15, 16 Pro, Pro Max, 16 Pro Max; Android 360x640, 360x780, Pixel 412x915; three landscape phones; iPad mini, Air and Pro. All pass.
 
