@@ -76,7 +76,7 @@
     var b = e.target.closest("[data-buy]");
     if (!b) return;
     e.preventDefault();
-    try { if (navigator.vibrate) navigator.vibrate(8); } catch (x) {} // a light tick under the thumb (Android)
+    try { if (navigator.vibrate) navigator.vibrate(8); } catch (x) {}
     if (checkoutUrl) {
       if (b.classList.contains("btn")) {
         b.classList.add("is-loading");
@@ -111,7 +111,7 @@
   var eta = doc.querySelector("[data-eta] span");
   if (eta) {
     var e1 = addDays(today, SHIP_MIN), e2 = addDays(today, SHIP_MAX);
-    var e2s = e1.getMonth() === e2.getMonth() ? String(e2.getDate()) : fmt(e2); // "Nov 14 to 21", or "Nov 28 to Dec 5"
+    var e2s = e1.getMonth() === e2.getMonth() ? String(e2.getDate()) : fmt(e2);
     eta.innerHTML = "Free shipping, arrives <strong>" + fmt(e1) + " to " + e2s + "</strong>";
   }
 
@@ -119,7 +119,7 @@
   if (hol) {
     var y = today.getFullYear(), list = [];
     [y, y + 1].forEach(function (yr) {
-      // Thanksgiving: fourth Thursday of November. Cutoff is our own 1 to 2 week promise plus a day, so it arrives the day before.
+      // Thanksgiving (4th Thu of Nov): cutoff is our 2-week max plus a day
       var tg = new Date(yr, 10, 1, 12); tg.setDate(1 + (4 - tg.getDay() + 7) % 7 + 21);
       list.push({ name: "Thanksgiving", date: tg, margin: SHIP_MAX + 1 });
       list.push({ name: "Christmas", date: new Date(yr, 11, 25, 12) });
@@ -167,7 +167,7 @@
     avgEl.textContent = Number(a).toFixed(1);
     setStars(revSec.querySelector(".reviews__score [data-stars]"), a);
     cntEl.textContent = (R.count || items.length).toLocaleString("en-US") + " reviews";
-    var shown = 0, PAGE = win.matchMedia("(max-width: 699px)").matches ? items.length : 9; // phones swipe through all of them
+    var shown = 0, PAGE = win.matchMedia("(max-width: 699px)").matches ? items.length : 9;
     var card = function (r) {
       var el = doc.createElement("article"); el.className = "review";
       var s = doc.createElement("span"); s.className = "stars"; s.textContent = "★★★★★"; s.setAttribute("role", "img");
@@ -175,7 +175,6 @@
       var p = doc.createElement("p"); p.className = "review__text"; p.textContent = r.text; el.appendChild(p);
       var by = doc.createElement("p"); by.className = "review__by";
       var n = doc.createElement("span"); n.className = "review__name"; n.textContent = r.name || "Customer"; by.appendChild(n);
-      if (r.verified) { var v = doc.createElement("span"); v.className = "review__verified"; v.textContent = "Verified buyer"; by.appendChild(v); }
       el.appendChild(by);
       return el;
     };
@@ -273,7 +272,7 @@
     if (endSec) new IntersectionObserver(function (en) { atEnd = en[0].isIntersecting || en[0].boundingClientRect.top < 0; setBar(); }).observe(endSec);
   }
 
-  /* ---------- Phones: the header tucks away while reading down, and comes back the moment you scroll up ---------- */
+  /* ---------- Phones: header tucks away scrolling down, returns scrolling up ---------- */
   var hdr = doc.querySelector("[data-header]"), narrow = win.matchMedia("(max-width: 959px)");
   if (hdr) {
     var lastY = win.scrollY, tick = false;
