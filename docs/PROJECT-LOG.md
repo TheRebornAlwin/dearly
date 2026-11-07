@@ -328,6 +328,9 @@ Most traffic is Meta ads on phones, so the page was tuned for a thumb:
 - **Touch feel.** No grey tap flash; buttons, questions and links give their own pressed state; Buy gives a tiny haptic tick on Android.
 - Gallery slides use `overflow: clip` instead of `hidden`. Hidden makes each slide its own scroll container, which silently breaks the swipe-linked effect.
 - Page height on a 390 px phone went from 11,463 px to about 10,200 px.
+- **Main photo never cropped (Nov 7).** An old `max-height: 50svh` plus `object-fit: cover` cut the top and bottom off the first photo on most phones. Now the photo is always the whole square: edge to edge on portrait phones; on landscape phones and tablets its size is capped by the screen height (`100svh` minus header and banner) and it is centred.
+- **44 px tap targets** on touch screens for footer links, the rating link and header links, without changing how they look.
+- **Device audit:** 17 sizes checked for horizontal scroll, off-screen or clipped text, cropped photos, the first photo running off screen, and small tap targets: iPhone SE 1 and 3, mini, 14, 15, 16 Pro, Pro Max, 16 Pro Max; Android 360x640, 360x780, Pixel 412x915; three landscape phones; iPad mini, Air and Pro. All pass.
 
 ---
 
