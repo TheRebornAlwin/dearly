@@ -158,7 +158,7 @@ Taken from the supplier's photos (AliExpress item 3256808690219018). The old cop
 | Size | 0.8 x 0.7 in | 0.91 x 0.51 in (2.3 x 1.3 cm) |
 | Chain | 18 to 22 in | 17.7 in (45 cm) plus 2 in (5 cm) extender |
 | Stones | | Cubic zirconia |
-| Metal / tarnish | "stainless steel, won't turn her skin green" | **Unknown.** Claim removed until the supplier confirms the base metal. |
+| Metal / tarnish | "stainless steel, won't turn her skin green" | **Owner confirmed (Nov 8):** no tarnish, no green skin, fine in the shower; FAQ says take it off for pools and the ocean. Base metal itself still not named on the site. |
 
 **The real card text:**
 
@@ -621,6 +621,9 @@ During design work, every change was also checked visually:
 
 - **Checkout:** waiting on the Shopify variant ID and the shop's `.myshopify.com` address.
 - **www.givedearly.com:** still shows the old Squarespace page. Add `www` as a custom domain in the Cloudflare Pages project.
-- **Base metal:** confirm with the supplier. If it is stainless steel or 925 silver, add the "won't tarnish" selling point back.
+- **Base metal:** the owner confirmed the no-tarnish claim (Nov 8, now in the FAQ). Still worth naming the actual metal in Specifications once known.
 - **Legal placeholders:** `[LEGAL ENTITY NAME]`, `[REGISTERED ADDRESS]`, `[JURISDICTION]` and `[DATE]` in `policies/src/*.md`, then rebuild the policy pages.
 - **Optional:** `META_CAPI_TOKEN` in Cloudflare; gated deploys; DNSSEC, CAA and SPF/DKIM/DMARC; a 3000 px version of the wide worn photo for big high-resolution screens.
+
+### FAQ additions (Nov 8)
+Three owner-written FAQs added (chain strength and lobster clasp, tarnish and green skin, no price or invoice in the package), also in the FAQPage JSON-LD. The owner's "!" were changed to periods because of the copy rule.
