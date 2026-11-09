@@ -118,9 +118,6 @@
   if (hol) {
     var y = today.getFullYear(), list = [];
     [y, y + 1].forEach(function (yr) {
-      // Thanksgiving (4th Thu of Nov): cutoff is our 2-week max plus a day
-      var tg = new Date(yr, 10, 1, 12); tg.setDate(1 + (4 - tg.getDay() + 7) % 7 + 21);
-      list.push({ name: "Thanksgiving", date: tg, margin: SHIP_MAX + 1 });
       list.push({ name: "Christmas", date: new Date(yr, 11, 25, 12), margin: 25 - XMAS_BY });
       list.push({ name: "Valentine’s Day", date: new Date(yr, 1, 14, 12) });
     });
