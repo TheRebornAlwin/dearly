@@ -40,7 +40,7 @@ const base = `http://localhost:${server.address().port}`;
 
 const browser = await puppeteer.launch({ executablePath: process.env.CHROME_PATH || "/usr/bin/google-chrome", args: ["--no-sandbox"] });
 const errors = [], warnings = [];
-const pagesToTest = ["/", "/policies/refund-policy", "/404.html"];
+const pagesToTest = ["/", "/girlfriend-giftbox", "/policies/refund-policy", "/404.html"];
 for (const url of pagesToTest) {
   for (const [w, h] of (url === "/" ? [[360, 640], [390, 844], [768, 1024], [1440, 900]] : [[390, 844]])) {
     const page = await browser.newPage();

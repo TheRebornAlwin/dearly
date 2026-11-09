@@ -627,3 +627,19 @@ During design work, every change was also checked visually:
 
 ### FAQ additions (Nov 8)
 Three owner-written FAQs added (chain strength and lobster clasp, tarnish and green skin, no price or invoice in the package), also in the FAQPage JSON-LD. The owner's "!" were changed to periods because of the copy rule.
+
+### Stage 2 / Stage 3 split (Nov 8)
+Two owner briefs, built from the target-market research (buyer: a man 20 to 45 with a girlfriend, scrolling at night, not shopping; fears in order: it won't mean anything, it'll look cheap, she won't like it; never ask him to be sentimental, the card says it for him).
+
+**Root page (Stage 2, the claim):**
+- Hero: "The gift she'll cry over, then never take off." / "An infinity heart necklace, a message card already written, and a box that's ready to give." (og:description matches.)
+- Star rating and count moved from above the price to directly under it.
+- "She has jewelry. None of it says anything." sits above "Read what she'll read." (replaces the "The card inside" eyebrow on this page).
+- In the box, item 03: nothing to wrap, card already inside, no price or invoice anywhere in the box.
+- Guarantee: "email us within 90 days and we refund you in full. / No photos. No return form. No questions about why." Matches the refund policy (no photos, no form, no reason).
+- Closing block: "You can stop looking. / This is it, and it'll be here long before you need it." From Dec 1 to Dec 5, site.js swaps in "Order by December 5 for Christmas delivery."; Dec 6 to 31 the subline becomes "This is it." Setting: `XMAS_BY` in site.js, which also moves the Christmas cutoff in the buy box and banner to Dec 5 (was Dec 4).
+- FAQ order: chain, tarnish, price/invoice, "When will it arrive?" (7 to 14 days), then pendant size, chain length, international, damaged, returns. JSON-LD in the same order.
+- Delivery copy now says 7 to 14 days everywhere. Specs care line now agrees with the FAQ (fine in the shower, off for pools and the ocean).
+- Not done, waiting on assets: a scale photo (the closed box in a hand) and "How big is the box?" (needs the box dimensions). The first gallery image was already the card.
+
+**/girlfriend-giftbox (Stage 3, the mechanism):** `girlfriend-giftbox.html`, generated from index.html by `tools/variant.py` (stamp.py runs it; CI checks it with `variant.py --check`). Differences only: title, description and OG text; hero "She has jewelry. None of it says anything." with the bracelet/earrings subline; a new "Why none of it stuck / What's different about this one" section (narrow 34ch measure, left-aligned, no images) right under the hero; the card section keeps its "The card inside" eyebrow instead of the jewelry line. Canonical points at the root page; not in the sitemap. Same pixel, events, checkout. Traffic plan: claim and reaction ads to the root, mechanism ad here. Judge on CTR and cost per landing page view, not orders.

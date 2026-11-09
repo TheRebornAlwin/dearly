@@ -32,6 +32,8 @@ def stamp_images(text):
     return IMG.sub(lambda m: m.group(1) + ("?v=" + img_stamps[m.group(2)] if m.group(2) in img_stamps else ""), text)
 
 check = "--check" in sys.argv
+# /girlfriend-giftbox is built from index.html, so rebuild it first and it gets the same stamps
+if not check: import subprocess; subprocess.run([sys.executable, str(ROOT / "tools" / "variant.py")], check=True)
 stale = []
 for page in pages():
     text = page.read_text(encoding="utf8")

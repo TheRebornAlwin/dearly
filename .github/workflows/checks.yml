@@ -28,6 +28,8 @@ jobs:
       - run: npm install --no-audit --no-fund
       - name: Asset fingerprints are current
         run: python3 stamp.py --check
+      - name: /girlfriend-giftbox matches index.html
+        run: python3 variant.py --check
       - name: Static checks (links, copy rules, JSON-LD, budgets, headers)
         run: node check.mjs
       - name: Browser checks (4 screen sizes, CSP, errors, layout)

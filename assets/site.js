@@ -7,7 +7,7 @@
   var PIXEL_ID = "29461693903447213";
   var CONSENT_KEY = "dearly-consent";
   var PRICE = cfg.price || 49.99, CUR = cfg.currency || "USD";
-  var SHIP_MIN = 7, SHIP_MAX = 14, HOLIDAY_MARGIN = 21; // days; matches the shipping policy
+  var SHIP_MIN = 7, SHIP_MAX = 14, HOLIDAY_MARGIN = 21, XMAS_BY = 5; // days; order by Dec 5 for Christmas
   var fineHover = win.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   function store(k, v) {
@@ -15,7 +15,7 @@
   }
   function uid() { return (win.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2); }
 
-  /* ---------- Meta Pixel + server-side copy, only after consent ---------- */
+  /* Meta Pixel + server-side copy, only after consent */
   var pixelLoaded = false;
   function loadPixel() {
     if (pixelLoaded) return;
@@ -32,7 +32,7 @@
     track('PageView');
     track('ViewContent', { content_name: 'To My Beautiful Girlfriend Infinity Heart Necklace', content_type: 'product', content_ids: [String(cfg.variantId || 'dearly-necklace')], value: PRICE, currency: CUR });
   }
-  // Browser event plus the same event sent from our server, deduplicated by Meta through event_id.
+  // Pixel plus server copy, deduped by event_id.
   function track(ev, data) {
     if (!pixelLoaded) return;
     var id = uid();
@@ -54,22 +54,21 @@
     if (e.target.closest("[data-consent-open]") && banner) banner.hidden = false;
   });
 
-  /* ---------- Buy: straight to Shopify checkout ---------- */
+  /* Buy: straight to Shopify checkout */
   var checkoutUrl = "", checkoutOrigin = "";
   if (cfg.shopDomain && /^\d+$/.test(String(cfg.variantId))) {
     var host = String(cfg.shopDomain).replace(/^https?:\/\//, "").replace(/\/.*$/, "");
     checkoutOrigin = "https://" + host;
     checkoutUrl = checkoutOrigin + "/cart/" + cfg.variantId + ":1";
   }
-  // Warm up the connection to Shopify the moment intent shows, so checkout opens faster.
+  // Preconnect to Shopify on first intent.
   var warmed = false;
   function warm() {
     if (warmed || !checkoutOrigin) return;
     warmed = true;
     var l = doc.createElement("link"); l.rel = "preconnect"; l.href = checkoutOrigin; doc.head.appendChild(l);
   }
-  doc.addEventListener("pointerover", function (e) { if (e.target.closest && e.target.closest("[data-buy]")) warm(); }, { passive: true });
-  doc.addEventListener("touchstart", function (e) { if (e.target.closest && e.target.closest("[data-buy]")) warm(); }, { passive: true });
+  ["pointerover", "touchstart"].forEach(function (t) { doc.addEventListener(t, function (e) { if (e.target.closest && e.target.closest("[data-buy]")) warm(); }, { passive: true }); });
 
   var msg = doc.querySelector("[data-buy-msg]");
   doc.addEventListener("click", function (e) {
@@ -99,7 +98,7 @@
     });
   });
 
-  /* ---------- Delivery window and holiday cutoff, computed from today ---------- */
+  /* Delivery window and holiday cutoff, computed from today */
   var fmt = function (d, wd) { // dates never split across two lines
     var t;
     try { t = d.toLocaleDateString("en-US", wd ? { weekday: "short", month: "short", day: "numeric" } : { month: "short", day: "numeric" }); }
@@ -122,7 +121,7 @@
       // Thanksgiving (4th Thu of Nov): cutoff is our 2-week max plus a day
       var tg = new Date(yr, 10, 1, 12); tg.setDate(1 + (4 - tg.getDay() + 7) % 7 + 21);
       list.push({ name: "Thanksgiving", date: tg, margin: SHIP_MAX + 1 });
-      list.push({ name: "Christmas", date: new Date(yr, 11, 25, 12) });
+      list.push({ name: "Christmas", date: new Date(yr, 11, 25, 12), margin: 25 - XMAS_BY });
       list.push({ name: "Valentine’s Day", date: new Date(yr, 1, 14, 12) });
     });
     list.sort(function (a, b) { return a.date - b.date; });
@@ -143,7 +142,15 @@
     }
   }
 
-  /* ---------- Reviews: only real ones, from assets/reviews.js ---------- */
+  // Closing block: relief, then from Dec 1 the real Christmas deadline
+  var fin = doc.querySelector("[data-final]");
+  if (fin && today.getMonth() === 11) {
+    var fp = fin.querySelector(".lead");
+    if (today.getDate() <= XMAS_BY) { fin.querySelector("h2").textContent = "Order by December " + XMAS_BY + " for Christmas delivery."; fp.hidden = true; }
+    else fp.textContent = "This is it.";
+  }
+
+  /* Reviews: only real ones, from assets/reviews.js */
   var R = win.DEARLY_REVIEWS || {};
   var items = (R.items || []).filter(function (r) { return r && r.text; });
   var setStars = function (el, v) { if (el) el.style.setProperty("--pct", Math.max(0, Math.min(5, v)) / 5 * 100 + "%"); };
@@ -188,7 +195,7 @@
     page(); revSec.hidden = false;
   }
 
-  /* ---------- Gallery: dots on mobile, viewer everywhere ---------- */
+  /* Gallery: dots on mobile, viewer everywhere */
   var gal = doc.querySelector("[data-gallery]");
   var slides = gal ? [].slice.call(gal.querySelectorAll(".gallery__slide")) : [];
   if (gal && "IntersectionObserver" in win) {
@@ -257,7 +264,7 @@
     dlg.addEventListener("close", function () { if (opener) opener.focus(); });
   }
 
-  /* ---------- Sticky buy bar: up between the main Buy button and the closing one ---------- */
+  /* Sticky buy bar: up between the main Buy button and the closing one */
   var main = doc.querySelector("[data-buy-main]"), bar = doc.querySelector("[data-sticky]"), endSec = doc.querySelector(".final");
   if (main && bar && "IntersectionObserver" in win) {
     var barBtn = bar.querySelector("a"), pastMain = false, atEnd = false;
@@ -272,7 +279,7 @@
     if (endSec) new IntersectionObserver(function (en) { atEnd = en[0].isIntersecting || en[0].boundingClientRect.top < 0; setBar(); }).observe(endSec);
   }
 
-  /* ---------- Phones: header tucks away scrolling down, returns scrolling up ---------- */
+  /* Phones: header tucks away scrolling down, returns scrolling up */
   var hdr = doc.querySelector("[data-header]"), narrow = win.matchMedia("(max-width: 959px)");
   if (hdr) {
     var lastY = win.scrollY, tick = false;
@@ -288,7 +295,7 @@
     }, { passive: true });
   }
 
-  /* ---------- Light on the card follows the pointer (desktop only) ---------- */
+  /* Light on the card follows the pointer (desktop only) */
   var card = doc.querySelector("[data-shine]");
   if (card && fineHover && !win.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     var raf = 0, px = 0, py = 0;
