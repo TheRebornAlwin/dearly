@@ -4,8 +4,7 @@
     python tools/variant.py --check  exit 1 if it is out of date (used by CI)
 
 Never edit girlfriend-giftbox.html by hand. Edit index.html and rerun this (stamp.py runs it for you).
-Only the head text, the hero, the new "Why none of it stuck" section and the line above the card
-heading differ. Everything else is copied byte for byte, so the A/B test changes exactly one thing.
+Only the head text, the hero and the new "Why none of it stuck" section differ. Everything else is copied byte for byte, so the A/B test changes exactly one thing.
 The canonical tag stays pointed at the root page."""
 import pathlib, sys
 
@@ -45,7 +44,6 @@ def build(s):
     r('<h2 class="display" id="statement-h" data-reveal>The gift she’ll cry over, then never take off.</h2>\n      <p class="lead" data-reveal>An infinity heart necklace, a message card already written, and a box that’s ready to give.</p>',
       f'<h2 class="display" id="statement-h" data-reveal>{HERO}</h2>\n      <p class="lead" data-reveal>{SUB}</p>')
     r('  </section>\n\n  <!-- Read the card -->', '  </section>\n' + WHY + '\n  <!-- Read the card -->')
-    r('<p class="reading__pre">She has jewelry. None of it says anything.</p>', '<p class="eyebrow eyebrow--light">The card inside</p>')
     return s
 
 out = build(SRC.read_text(encoding="utf8"))
