@@ -13,7 +13,7 @@ TEMPLATE = """<!doctype html>
 <link rel="canonical" href="https://givedearly.com/policies/{slug}">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.png" type="image/png" sizes="192x192">
-<link rel="stylesheet" href="/assets/site.css?v=7daf2efc11">
+<link rel="stylesheet" href="/assets/site.css?v=f408656a6d">
 </head>
 <body>
 <header class="header">

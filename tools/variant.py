@@ -11,21 +11,22 @@ import pathlib, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC, OUT = ROOT / "index.html", ROOT / "girlfriend-giftbox.html"
 
-HERO = "She has jewelry. None of it says anything."
-SUB = "You’ve given her a bracelet. Earrings. Maybe a necklace she wears sometimes. All of it lovely. All of it silent."
+HERO = "She has jewelry, but none of it says anything."
+SUB = "You’ve given her a bracelet, earrings, maybe a necklace she wears sometimes. All of it is lovely, but none of it says what you’re truly trying to say."
 
+# Centered, one line at a time: each line fades in on its own as it scrolls into view
 WHY = """
   <!-- Why none of it stuck (this page only) -->
   <section class="why" aria-labelledby="why-h">
-    <div class="wrap">
-      <div class="why__text">
-        <h2 class="h2" id="why-h">Why none of it stuck</h2>
-        <p>Every gift you’ve given her was an object. The thing you actually meant stayed in your head, because you’ve never been able to get it out of your mouth without it coming out wrong.</p>
-        <p>So she got the object. She never got the sentence.</p>
-        <h2 class="h2">What’s different about this one</h2>
-        <p>It’s worn, and it carries words. So the words don’t get read once and go in a drawer. They fire again every time she puts it on.</p>
-        <p>Which is how a fifty dollar necklace ends up being the thing she doesn’t take off.</p>
-      </div>
+    <div class="wrap why__text">
+      <h2 class="why__k" id="why-h" data-reveal>Why none of it stuck</h2>
+      <p data-reveal>Every gift you’ve given her was a thing, because what you actually meant never made it out of your head.</p>
+      <p class="why__hit" data-reveal>She got the gift, but she never got the words.</p>
+      <span class="why__rule" aria-hidden="true" data-reveal></span>
+      <h2 class="why__k" data-reveal>What’s different about this one</h2>
+      <p data-reveal>The words come with it, already written, and she wears them, so they don’t get read once and end up in a drawer.</p>
+      <p data-reveal>Every time she puts it on, she remembers what you meant.</p>
+      <p class="why__hit why__hit--end" data-reveal>That’s how a fifty dollar necklace becomes the one she never takes off.</p>
     </div>
   </section>
 """
