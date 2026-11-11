@@ -9,7 +9,7 @@ Fill in [LEGAL ENTITY NAME] and [REGISTERED ADDRESS] before publishing.
 
 You have 90 days from the delivery date to return any item for a full refund. We do not ask why.
 
-To start a return, email hello@givedearly.com with your order number. We will send return instructions. You do not need to provide photographs, fill in a form, or explain your reason.
+To start a return, email thedearlyco@gmail.com with your order number. We will send return instructions. You do not need to provide photographs, fill in a form, or explain your reason.
 
 Items should be returned in any condition. We do not require original packaging.
 
@@ -19,7 +19,7 @@ Once your return is on its way back to us, we issue your refund to the original 
 
 ## Damaged or incorrect items
 
-If your order arrives damaged, defective, or is not what you ordered, email hello@givedearly.com with a photograph. We will send a replacement at no cost and you do not need to return the original item.
+If your order arrives damaged, defective, or is not what you ordered, email thedearlyco@gmail.com with a photograph. We will send a replacement at no cost and you do not need to return the original item.
 
 ## Items lost in transit
 
@@ -31,4 +31,4 @@ Orders can be cancelled for a full refund any time before dispatch. Email us as 
 
 ## Contact
 
-[LEGAL ENTITY NAME], [REGISTERED ADDRESS]. Email hello@givedearly.com. We answer every email, usually within one business day.
+[LEGAL ENTITY NAME], [REGISTERED ADDRESS]. Email thedearlyco@gmail.com. We answer every email within 24 hours.

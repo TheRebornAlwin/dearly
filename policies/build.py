@@ -13,7 +13,7 @@ TEMPLATE = """<!doctype html>
 <link rel="canonical" href="https://givedearly.com/policies/{slug}">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.png" type="image/png" sizes="192x192">
-<link rel="stylesheet" href="/assets/site.css?v=94f2a3bfe9">
+<link rel="stylesheet" href="/assets/site.css?v=7daf2efc11">
 </head>
 <body>
 <header class="header">
@@ -45,7 +45,7 @@ def inline(t):
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
     t = re.sub(r"`(.+?)`", r"\1", t)
     t = re.sub(r"\[(.+?)\]\((.+?)\)", r'<a href="\2">\1</a>', t)
-    t = re.sub(r"\b([\w.+-]+@givedearly\.com)\b", r'<a href="mailto:\1">\1</a>', t)
+    t = re.sub(r"\b([\w.+-]+@(?:givedearly\.com|gmail\.com))\b", r'<a href="mailto:\1">\1</a>', t)
     return t
 
 def convert(md):

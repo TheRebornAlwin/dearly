@@ -144,7 +144,6 @@
   if (fin && today.getMonth() === 11) {
     var fp = fin.querySelector(".lead");
     if (today.getDate() <= XMAS_BY) { fin.querySelector("h2").textContent = "Order by December " + XMAS_BY + " for Christmas delivery."; fp.hidden = true; }
-    else fp.textContent = "This is it.";
   }
 
   /* Reviews: only real ones, from assets/reviews.js */

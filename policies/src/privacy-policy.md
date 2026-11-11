@@ -7,7 +7,7 @@ Fill in [LEGAL ENTITY NAME], [REGISTERED ADDRESS] and [DATE] before publishing.
 
 ## Who we are
 
-[LEGAL ENTITY NAME], [REGISTERED ADDRESS], operating givedearly.com. For privacy questions, email hello@givedearly.com.
+[LEGAL ENTITY NAME], [REGISTERED ADDRESS], operating givedearly.com. For privacy questions, email thedearlyco@gmail.com.
 
 ## What we collect
 
@@ -37,7 +37,7 @@ Order records are kept as long as required for tax and accounting purposes, gene
 
 ## Your rights
 
-Depending on where you live, you may have the right to access, correct, delete, or receive a copy of your personal information, to object to or restrict its processing, to withdraw consent, and to opt out of targeted advertising or the sale or sharing of personal information. We do not discriminate against anyone for exercising these rights. To make a request, email hello@givedearly.com. We respond within one month. If you are in the UK or EU you may also complain to your local data protection authority.
+Depending on where you live, you may have the right to access, correct, delete, or receive a copy of your personal information, to object to or restrict its processing, to withdraw consent, and to opt out of targeted advertising or the sale or sharing of personal information. We do not discriminate against anyone for exercising these rights. To make a request, email thedearlyco@gmail.com. We respond within one month. If you are in the UK or EU you may also complain to your local data protection authority.
 
 ## Children
 

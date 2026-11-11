@@ -63,4 +63,4 @@ These terms are governed by the laws of [JURISDICTION], and its courts have excl
 
 ## 15. Contact
 
-hello@givedearly.com
+thedearlyco@gmail.com

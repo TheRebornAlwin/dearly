@@ -154,10 +154,6 @@ button { font: inherit; color: inherit; }
 .btn--ghost::before { background: var(--ink); }
 @media (hover: hover) { .btn--ghost:hover { color: var(--paper-raised); border-color: var(--ink); box-shadow: none; } }
 .btn--sm { min-height: 44px; padding: 0 1.1rem; font-size: 0.9375rem; width: auto; }
-.link-arrow { display: inline-flex; gap: .5rem; margin-top: 2rem; font-weight: 500; text-decoration: none; padding-bottom: 3px; background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat; transition: background-size .45s var(--ease-out); }
-.link-arrow::after { content: "\2192"; transition: transform .35s var(--ease-out); }
-.link-arrow:hover { background-size: 0 1px; background-position: right bottom; }
-.link-arrow:hover::after { transform: translateX(5px); }
 .linklike { background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: .2em; }
 
 /* ---------- Announcement + header ---------- */
@@ -361,7 +357,7 @@ button { font: inherit; color: inherit; }
 .pin--2 { left: 26%; top: 21.5%; }
 .pin--3 { left: 85%; top: 90.5%; }
 
-.inbox__text .link-arrow { margin-top: 2.25rem; }
+.inbox__text .btn { margin-top: 2.25rem; max-width: 24rem; }
 .inbox__list { list-style: none; margin: 2.25rem 0 0; padding: 0; border-top: 1px solid var(--rule); }
 .inbox__item { position: relative; display: grid; grid-template-columns: 3.4rem 1fr; padding: 1.4rem 0 1.45rem; border-bottom: 1px solid var(--rule); }
 .inbox__item::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--wax); transform: scaleX(0); transform-origin: left; transition: transform .7s var(--ease-out); }
@@ -646,7 +642,6 @@ a, button, summary, .gallery__slide { -webkit-tap-highlight-color: transparent; 
 .header__buy { transition: background-color .3s var(--ease-out), color .3s var(--ease-out), opacity .35s var(--ease-out), visibility .35s; }
 .header__buy:active { background: var(--ink); color: var(--paper-raised); }
 .faq summary:active { color: var(--wax); }
-.link-arrow:active { background-size: 0 1px; }
 
 @media (max-width: 959px) {
   /* One Buy button on screen at a time: the header one steps aside while the bottom bar is up */

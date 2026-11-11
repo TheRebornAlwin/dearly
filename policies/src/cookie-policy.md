@@ -32,6 +32,6 @@ Cookies set by Shopify, Meta, and our analytics providers are governed by their 
 
 ## Contact
 
-hello@givedearly.com
+thedearlyco@gmail.com
 
 Last updated: [DATE]
