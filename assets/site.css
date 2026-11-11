@@ -777,3 +777,7 @@ a, button, summary, .gallery__slide { -webkit-tap-highlight-color: transparent; 
 .why__hit--end { font-style: italic; color: var(--wax); }
 .why__rule { display: block; width: 1px; height: 5rem; margin: 5rem auto; background: var(--wax); opacity: .4; }
 @media (prefers-reduced-motion: no-preference) { .why [data-reveal] { animation-range: entry 20% cover 40%; } }
+/* In the box: the unboxing clip fades in over the photo once it plays (site.js) */
+.inbox__media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); opacity: 0; transition: opacity 1s; }
+.is-playing video { opacity: 1; }
+.is-playing .pin { display: none; }

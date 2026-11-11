@@ -8,7 +8,7 @@
   var CONSENT_KEY = "dearly-consent";
   var PRICE = cfg.price || 49.99, CUR = cfg.currency || "USD";
   var SHIP_MIN = 7, SHIP_MAX = 14, HOLIDAY_MARGIN = 21, XMAS_BY = 5; // days; order by Dec 5 for Christmas
-  var fineHover = win.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var fineHover = win.matchMedia("(hover: hover) and (pointer: fine)").matches, calm = win.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function store(k, v) {
     try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; }
@@ -90,7 +90,7 @@
     var buy = doc.getElementById("buy");
     if (buy && !b.hasAttribute("data-buy-main")) buy.scrollIntoView({ behavior: "smooth" });
   });
-  // Coming back from checkout with the Back button: reset the button.
+  // Back from checkout: reset the button
   win.addEventListener("pageshow", function () {
     doc.querySelectorAll(".btn.is-loading").forEach(function (b) {
       b.classList.remove("is-loading");
@@ -139,7 +139,7 @@
     }
   }
 
-  // Closing block: relief, then from Dec 1 the real Christmas deadline
+  // Closing block: Dec 1-5 Christmas deadline
   var fin = doc.querySelector("[data-final]");
   if (fin && today.getMonth() === 11) {
     var fp = fin.querySelector(".lead");
@@ -293,7 +293,13 @@
 
   /* Light on the card follows the pointer (desktop only) */
   var card = doc.querySelector("[data-shine]");
-  if (card && fineHover && !win.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  // Unboxing clip: plays once in view
+  var vid = doc.querySelector("[data-unbox]");
+  if (vid && !calm) new IntersectionObserver(function (e, o) {
+    if (e[0].isIntersecting) { o.disconnect(); vid.play().then(function () { vid.parentNode.classList.add("is-playing"); }, function () {}); }
+  }, { threshold: .6 }).observe(vid);
+
+  if (card && fineHover && !calm) {
     var raf = 0, px = 0, py = 0;
     card.addEventListener("pointerenter", function () { card.classList.add("is-lit"); });
     card.addEventListener("pointerleave", function () { card.classList.remove("is-lit"); });

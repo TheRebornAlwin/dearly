@@ -24,10 +24,10 @@ stamps = {a: hashlib.sha256((ROOT / a).read_bytes().replace(CR, b"")).hexdigest(
 # One stamp per photo name: images/box-card-800.avif -> group "box-card"
 groups = {}
 for f in sorted((ROOT / "images").glob("*")):
-    m = re.fullmatch(r"(.+)-(\d+)\.(avif|jpg)", f.name)
+    m = re.fullmatch(r"(.+)-(\d+)\.(avif|jpg|mp4|webm)", f.name)
     if m: groups.setdefault(m.group(1), hashlib.sha256()).update(f.read_bytes())
 img_stamps = {g: h.hexdigest()[:8] for g, h in groups.items()}
-IMG = re.compile(r"(/images/([a-z0-9-]+)-(\d+)\.(?:avif|jpg))(\?v=[0-9a-f]*)?")
+IMG = re.compile(r"(/images/([a-z0-9-]+)-(\d+)\.(?:avif|jpg|mp4|webm))(\?v=[0-9a-f]*)?")
 def stamp_images(text):
     return IMG.sub(lambda m: m.group(1) + ("?v=" + img_stamps[m.group(2)] if m.group(2) in img_stamps else ""), text)
 
