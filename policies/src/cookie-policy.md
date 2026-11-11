@@ -4,7 +4,7 @@ Shopify has no Cookie policy field under Settings, Policies. Two options:
 1. Create a page at Online Store, Pages, titled "Cookie Policy" with the handle `cookie-policy` and paste this in. The footer links to `/pages/cookie-policy` by default.
 2. Or append this text to the end of the Privacy policy, and change the footer's Cookie Policy link to `/policies/privacy-policy`.
 
-Fill in [DATE] before publishing.
+Dates and names filled in 2026-11-11.
 
 ---
 
@@ -34,4 +34,4 @@ Cookies set by Shopify, Meta, and our analytics providers are governed by their 
 
 thedearlyco@gmail.com
 
-Last updated: [DATE]
+Last updated: November 11, 2026

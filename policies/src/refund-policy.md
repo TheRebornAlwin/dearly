@@ -1,7 +1,7 @@
 # Refund and Return Policy
 
 Source for the policy page on givedearly.com. Run python policies/build.py after editing.
-Fill in [LEGAL ENTITY NAME] and [REGISTERED ADDRESS] before publishing.
+Names filled in 2026-11-11 (owner: business name Dearly, no address).
 
 ---
 
@@ -31,4 +31,4 @@ Orders can be cancelled for a full refund any time before dispatch. Email us as 
 
 ## Contact
 
-[LEGAL ENTITY NAME], [REGISTERED ADDRESS]. Email thedearlyco@gmail.com. We answer every email within 24 hours.
+Email thedearlyco@gmail.com and we’ll answer within 24 hours.

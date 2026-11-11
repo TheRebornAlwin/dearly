@@ -1,13 +1,13 @@
 # Terms of Service
 
 Source for the policy page on givedearly.com. Run python policies/build.py after editing.
-Fill in [LEGAL ENTITY NAME], [REGISTERED ADDRESS] and [JURISDICTION] before publishing.
+Names filled in 2026-11-11 (owner: business name Dearly, no address).
 
 ---
 
 ## 1. These terms
 
-This website is operated by [LEGAL ENTITY NAME], registered at [REGISTERED ADDRESS] (“we”, “us”, “Dearly”). By accessing givedearly.com or placing an order you agree to these terms. If you do not agree, please do not use the site.
+This website is operated by Dearly (“we”, “us”). By accessing givedearly.com or placing an order you agree to these terms. If you do not agree, please do not use the site.
 
 ## 2. Eligibility
 
@@ -59,7 +59,7 @@ We may update these terms. The version in force is the one published at the time
 
 ## 14. Governing law
 
-These terms are governed by the laws of [JURISDICTION], and its courts have exclusive jurisdiction, without affecting any mandatory consumer protections available to you where you live.
+These terms are governed by the laws of the United States. Nothing in them takes away any consumer protections you have under the laws of the state or country where you live.
 
 ## 15. Contact
 

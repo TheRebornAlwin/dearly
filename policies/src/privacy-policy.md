@@ -1,13 +1,13 @@
 # Privacy Policy
 
 Source for the policy page on givedearly.com. Run python policies/build.py after editing.
-Fill in [LEGAL ENTITY NAME], [REGISTERED ADDRESS] and [DATE] before publishing.
+Names filled in 2026-11-11 (owner: business name Dearly, no address).
 
 ---
 
 ## Who we are
 
-[LEGAL ENTITY NAME], [REGISTERED ADDRESS], operating givedearly.com. For privacy questions, email thedearlyco@gmail.com.
+Dearly operates givedearly.com. For privacy questions, email thedearlyco@gmail.com.
 
 ## What we collect
 
@@ -51,4 +51,4 @@ Our site runs over HTTPS and payments are handled by PCI-compliant processors. N
 
 We will post any changes here and update the date below.
 
-Last updated: [DATE]
+Last updated: November 11, 2026
