@@ -26,7 +26,7 @@ WHY = """
       <h2 class="why__k" data-reveal>What’s different about this one</h2>
       <p data-reveal>The words come with it, already written, and she wears them, so they don’t get read once and end up in a drawer.</p>
       <p data-reveal>Every time she puts it on, she remembers what you meant.</p>
-      <p class="why__hit why__hit--end" data-reveal>That’s how a fifty dollar necklace becomes the one she never takes off.</p>
+      <p class="why__hit why__hit--end" data-reveal>That’s how a $49 necklace becomes the one she never takes off.</p>
     </div>
   </section>
 """
