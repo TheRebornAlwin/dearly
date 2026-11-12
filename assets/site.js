@@ -170,20 +170,20 @@
     avgEl.textContent = Number(a).toFixed(1);
     setStars(revSec.querySelector(".reviews__score [data-stars]"), a);
     cntEl.textContent = (R.count || items.length).toLocaleString("en-US") + " reviews";
-    var shown = 0, PAGE = win.matchMedia("(max-width: 699px)").matches ? items.length : 9;
-    var card = function (r) {
+    var shown = 0, PAGE = 9;
+    var revCard = function (r) {
       var el = doc.createElement("article"); el.className = "review";
       var s = doc.createElement("span"); s.className = "stars"; s.textContent = "★★★★★"; s.setAttribute("role", "img");
       s.setAttribute("aria-label", (r.rating || 5) + " out of 5 stars"); setStars(s, r.rating || 5); el.appendChild(s);
       var p = doc.createElement("p"); p.className = "review__text"; p.textContent = r.text; el.appendChild(p);
-      var by = doc.createElement("p"); by.className = "review__by";
-      var n = doc.createElement("span"); n.className = "review__name"; n.textContent = r.name || "Customer"; by.appendChild(n);
-      el.appendChild(by);
+      if (r.name) { var by = doc.createElement("p"); by.className = "review__by";
+      var n = doc.createElement("span"); n.className = "review__name"; n.textContent = r.name; by.appendChild(n);
+      el.appendChild(by); }
       return el;
     };
     var page = function () {
       var f = doc.createDocumentFragment();
-      items.slice(shown, shown + PAGE).forEach(function (r) { f.appendChild(card(r)); });
+      items.slice(shown, shown + PAGE).forEach(function (r) { f.appendChild(revCard(r)); });
       grid.appendChild(f); shown = Math.min(items.length, shown + PAGE);
       more.hidden = shown >= items.length;
     };
