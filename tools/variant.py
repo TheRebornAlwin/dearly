@@ -22,7 +22,6 @@ WHY = """
       <h2 class="why__k" id="why-h" data-reveal>Why none of it stuck</h2>
       <p data-reveal>Every gift you’ve given her was a thing, because what you actually meant never made it out of your head.</p>
       <p class="why__hit" data-reveal>She got the gift, but she never got the words.</p>
-      <span class="why__rule" aria-hidden="true" data-reveal></span>
       <h2 class="why__k" data-reveal>What’s different about this one</h2>
       <p data-reveal>The words come with it, already written, and she wears them, so they don’t get read once and end up in a drawer.</p>
       <p data-reveal>Every time she puts it on, she remembers what you meant.</p>
