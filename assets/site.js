@@ -293,11 +293,12 @@
 
   /* Light on the card follows the pointer (desktop only) */
   var card = doc.querySelector("[data-shine]");
-  // Unboxing clip: plays once in view
+  // Unboxing clip: silent loop, runs only near the viewport
   var vid = doc.querySelector("[data-unbox]");
-  if (vid && !calm) new IntersectionObserver(function (e, o) {
-    if (e[0].isIntersecting) { o.disconnect(); vid.play().then(function () { vid.parentNode.classList.add("is-playing"); }, function () {}); }
-  }, { threshold: .6 }).observe(vid);
+  if (vid && !calm) new IntersectionObserver(function (e) {
+    if (!e[0].isIntersecting) return vid.pause();
+    vid.muted = true; vid.play().then(function () { vid.parentNode.classList.add("is-playing"); }, function () {});
+  }, { rootMargin: "300px" }).observe(vid);
 
   if (card && fineHover && !calm) {
     var raf = 0, px = 0, py = 0;

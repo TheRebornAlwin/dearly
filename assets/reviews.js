@@ -38,6 +38,7 @@ window.DEARLY_REVIEWS = {
     { rating: 5, text: "Not to big not to small. Looks very pretty!" },
     { rating: 4, text: "Comes exactly as shown. Beautiful piece of jewelry. Only reason it’s not 5 stars is the chain isn’t very good quality!" },
     { rating: 5, text: "For the price it was fantastic" },
+    { rating: 5, text: "i bought this product for a christmas present and it is wonderful looking and got delivered quickly but the only big problem i have was the delivery . the delivery driver was supposed to put it in my garage and instead i caught him on my camera throwing product on front porch and then requesting that it get changed to a front porch delivery . i dont get why people have to toss packages considering that it could be fragile" },
     { name: "Olivia", rating: 5, text: "It’s so cute!!" },
     { rating: 4, text: "Lovely message. Chain cheap, but the heart is gorgeous." },
     { rating: 5, text: "Was nice and my wife loved it" },
