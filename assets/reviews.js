@@ -35,22 +35,13 @@ window.DEARLY_REVIEWS = {
     { rating: 5, text: "I really like this necklace. Also so did my fiance and that’s what counts the most" },
     { rating: 5, text: "It was really nice quality and my girl loved it!" },
     { name: "Isabella", rating: 4, text: "very pretty, simple, and the card is sweet. i gave it to my best friend as a joke gift (she calls me her girlfriend lol) and she actually wears it now. chain is a little delicate tho it seems like, but still amazing." },
-    { rating: 5, text: "Not to big not to small. Looks very pretty!" },
+    { rating: 5, text: "WE Love it !" },
     { rating: 4, text: "Comes exactly as shown. Beautiful piece of jewelry. Only reason it’s not 5 stars is the chain isn’t very good quality!" },
-    { rating: 5, text: "For the price it was fantastic" },
+    { rating: 5, text: "Pretty the quality its amazing" },
     { rating: 5, text: "i bought this product for a christmas present and it is wonderful looking and got delivered quickly but the only big problem i have was the delivery . the delivery driver was supposed to put it in my garage and instead i caught him on my camera throwing product on front porch and then requesting that it get changed to a front porch delivery . i dont get why people have to toss packages considering that it could be fragile" },
     { name: "Olivia", rating: 5, text: "It’s so cute!!" },
     { rating: 4, text: "Lovely message. Chain cheap, but the heart is gorgeous." },
-    { rating: 5, text: "Was nice and my wife loved it" },
-    { rating: 5, text: "Pretty the quality its amazing" },
-    { rating: 5, text: "An attractive piece" },
-    { rating: 5, text: "WE Love it !" },
-    { rating: 5, text: "It looks great" },
-    { rating: 5, text: "She loved it" },
-    { rating: 5, text: "Great Gift" },
-    { rating: 5, text: "Great item" },
-    { rating: 5, text: "As described" },
-    { rating: 5, text: "love it!" },
-    { rating: 5, text: "Nice" }
+    { rating: 5, text: "For the price it was fantastic" },
+    { rating: 5, text: "Not to big not to small. Looks very pretty!" }
   ]
 };
