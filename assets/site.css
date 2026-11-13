@@ -647,7 +647,8 @@ a, button, summary, .gallery__slide { -webkit-tap-highlight-color: transparent; 
   .buy__inner { display: flex; flex-direction: column; }
   .buy__inner > .rating { align-self: flex-start; }
   .buy__inner > .included { order: 5; margin-top: 1.75rem; }
-  .included li { display: flex; justify-content: center; text-align: center; }
+  .included li { display: block; text-align: center; text-wrap: balance; }
+  .included li svg { display: inline-block; vertical-align: -5px; margin-right: .55rem; }
   .buy__inner > .trust { order: 6; margin-top: 0; border-top: 0; }
   .deadline { margin-top: 1.1rem; }
 }
