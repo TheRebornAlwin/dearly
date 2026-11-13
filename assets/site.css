@@ -783,3 +783,5 @@ a, button, summary, .gallery__slide { -webkit-tap-highlight-color: transparent; 
 .is-playing .pin { display: none; }
 .footer__links { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.25rem; }
 .buy__lede strong { font-weight: 650; color: var(--ink); }
+/* Phones: crop in on the card so it fills the frame */
+@media (max-width: 699px) { .reading__card img { scale: 1.28; } }
