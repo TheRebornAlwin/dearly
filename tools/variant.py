@@ -37,11 +37,11 @@ def build(s):
         s = s.replace(a, b)
     r('<!doctype html>\n', '<!doctype html>\n<!-- Generated from index.html by tools/variant.py. Do not edit by hand. -->\n')
     r('<title>To My Beautiful Girlfriend Infinity Heart Necklace | Dearly</title>', f'<title>{HERO} | Dearly</title>')
-    r('<meta name="description" content="An infinity sign linked through a heart, set on a card that says the things you mean. Free worldwide shipping, 90-day returns.">',
+    r('<meta name="description" content="An infinity sign linked through a heart, set on a card that speaks from your heart. Free worldwide shipping, 90-day returns.">',
       f'<meta name="description" content="{SUB}">')
     r('<meta property="og:title" content="To My Beautiful Girlfriend Infinity Heart Necklace">', f'<meta property="og:title" content="{HERO}">')
     r('<meta property="og:description" content="The gift she’ll cry over, then never take off.">', f'<meta property="og:description" content="{SUB}">')
-    r('<h2 class="display" id="statement-h" data-reveal>The gift she’ll cry over, then never take off.</h2>\n      <p class="lead" data-reveal>An infinity heart necklace, a message card already written, and a box that’s ready to give.</p>',
+    r('<h2 class="display" id="statement-h" data-reveal>The gift she’ll cry over, then never take off.</h2>\n      <p class="lead" data-reveal>An infinity heart necklace and a message card written to melt her heart, and a box that’s ready to give.</p>',
       f'<h2 class="display" id="statement-h" data-reveal>{HERO}</h2>\n      <p class="lead" data-reveal>{SUB}</p>')
     r('  </section>\n\n  <!-- Read the card -->', '  </section>\n' + WHY + '\n  <!-- Read the card -->')
     return s
