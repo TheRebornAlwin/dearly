@@ -16,7 +16,9 @@ export async function onRequestPost({ request, env, waitUntil }) {
 
   const origin = request.headers.get("Origin") || "";
   const host = new URL(request.url).host;
-  if (origin && new URL(origin).host !== host) return new Response(null, { status: 403 });
+  let originHost = "";
+  try { originHost = origin ? new URL(origin).host : host; } catch { originHost = ""; } // "null" or junk Origin
+  if (originHost !== host) return new Response(null, { status: 403 });
 
   const raw = await request.text();
   if (raw.length > MAX_BODY) return new Response(null, { status: 413 });

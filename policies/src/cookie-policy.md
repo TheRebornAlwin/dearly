@@ -16,7 +16,7 @@ Cookies are small text files placed on your device when you visit a website. We 
 
 Strictly necessary. Required for the site to work: keeping your cart, remembering you through checkout, security, and load balancing. These cannot be switched off and are set by Shopify.
 
-Analytics. Help us understand which pages people visit and where they leave, so we can improve the store. Set by Shopify analytics and, if enabled, Google Analytics.
+Analytics. Help us understand which pages people visit and where they leave, so we can improve the store. Set by Shopify analytics and Microsoft Clarity. Clarity records how visitors scroll and click on our pages so we can see where the page is confusing; it masks anything typed into forms. Declining in our banner switches Clarity off.
 
 Marketing. Let us measure our advertising and show relevant ads. This includes the Meta pixel, which records actions such as viewing a product or completing a purchase and reports them to Meta.
 
@@ -28,10 +28,10 @@ You can also block or delete cookies in your browser settings, though strictly n
 
 ## Third parties
 
-Cookies set by Shopify, Meta, and our analytics providers are governed by their own privacy policies, which you can find on their websites.
+Cookies set by Shopify, Meta, Microsoft, and our other analytics providers are governed by their own privacy policies, which you can find on their websites.
 
 ## Contact
 
 thedearlyco@gmail.com
 
-Last updated: November 11, 2026
+Last updated: November 13, 2026

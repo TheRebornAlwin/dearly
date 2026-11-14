@@ -1,6 +1,6 @@
 /*
   Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://connect.facebook.net https://static.cloudflareinsights.com; connect-src 'self' https://www.facebook.com https://connect.facebook.net https://cloudflareinsights.com; img-src 'self' data: https://www.facebook.com; style-src 'self'; font-src 'self'; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://connect.facebook.net https://static.cloudflareinsights.com https://www.clarity.ms https://scripts.clarity.ms; connect-src 'self' https://www.facebook.com https://connect.facebook.net https://cloudflareinsights.com https://*.clarity.ms https://c.bing.com; img-src 'self' data: https://www.facebook.com https://*.clarity.ms https://c.bing.com; style-src 'self'; font-src 'self'; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY

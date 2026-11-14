@@ -44,7 +44,7 @@
   }
 
   var banner = doc.querySelector("[data-consent]");
-  function setConsent(v) { store(CONSENT_KEY, v); if (banner) banner.hidden = true; if (v === "yes") loadPixel(); }
+  function setConsent(v) { store(CONSENT_KEY, v); if (banner) banner.hidden = true; if (v === "yes") loadPixel(); else if (win.clarity) win.clarity("consent", false); }
   var saved = store(CONSENT_KEY);
   if (saved === "yes") loadPixel();
   else if (saved !== "no" && banner) setTimeout(function () { banner.hidden = false; }, 1200);
@@ -70,13 +70,13 @@
   }
   ["pointerover", "touchstart"].forEach(function (t) { doc.addEventListener(t, function (e) { if (e.target.closest && e.target.closest("[data-buy]")) warm(); }, { passive: true }); });
 
-  var msg = doc.querySelector("[data-buy-msg]");
+  var msg = doc.querySelector("[data-buy-msg]"), going = false;
   doc.addEventListener("click", function (e) {
     var b = e.target.closest("[data-buy]");
     if (!b) return;
     e.preventDefault();
-    try { if (navigator.vibrate) navigator.vibrate(8); } catch (x) {}
     if (checkoutUrl) {
+      if (going) return; going = true; setTimeout(function () { going = false; }, 4000);
       if (b.classList.contains("btn")) {
         b.classList.add("is-loading");
         var label = b.querySelector(".btn__label");
@@ -92,6 +92,7 @@
   });
   // Back from checkout: reset the button
   win.addEventListener("pageshow", function () {
+    going = false;
     doc.querySelectorAll(".btn.is-loading").forEach(function (b) {
       b.classList.remove("is-loading");
       var l = b.querySelector(".btn__label"); if (l) l.textContent = "Buy now";
@@ -125,7 +126,7 @@
     for (var i = 0; i < list.length; i++) {
       var cut = addDays(list[i].date, -(list[i].margin || HOLIDAY_MARGIN));
       var daysLeft = Math.round((cut - today) / 864e5);
-      if (daysLeft >= 0 && daysLeft <= 45) {
+      if (daysLeft >= 0 && daysLeft <= 30) {
         hol.textContent = "Order by " + fmt(cut, true) + " for " + list[i].name;
         hol.hidden = false;
         var annHol = doc.querySelector("[data-announce-holiday]");
@@ -170,7 +171,7 @@
     avgEl.textContent = Number(a).toFixed(1);
     setStars(revSec.querySelector(".reviews__score [data-stars]"), a);
     cntEl.textContent = (R.count || items.length).toLocaleString("en-US") + " reviews";
-    var shown = 0, PAGE = innerWidth < 700 ? 99 : 9; // phones: all, in one row
+    var shown = 0, phone = win.matchMedia("(max-width: 699px)"); // phones: all, in one swipe row
     var revCard = function (r) {
       var el = doc.createElement("article"); el.className = "review";
       var s = doc.createElement("span"); s.className = "stars"; s.textContent = "★★★★★"; s.setAttribute("role", "img");
@@ -183,11 +184,12 @@
     };
     var page = function () {
       var f = doc.createDocumentFragment();
-      items.slice(shown, shown + PAGE).forEach(function (r) { f.appendChild(revCard(r)); });
-      grid.appendChild(f); shown = Math.min(items.length, shown + PAGE);
+      items.slice(shown, shown + (phone.matches ? 99 : 9)).forEach(function (r) { f.appendChild(revCard(r)); });
+      grid.appendChild(f); shown = grid.children.length;
       more.hidden = shown >= items.length;
     };
     more.addEventListener("click", page);
+    if (phone.addEventListener) phone.addEventListener("change", function () { if (phone.matches && shown < items.length) page(); });
     page(); revSec.hidden = false;
   }
 
@@ -295,10 +297,16 @@
   var card = doc.querySelector("[data-shine]");
   // Unboxing clip: silent loop, runs only near the viewport
   var vid = doc.querySelector("[data-unbox]");
-  if (vid && !calm) new IntersectionObserver(function (e) {
-    if (!e[0].isIntersecting) return vid.pause();
-    vid.muted = true; vid.play().then(function () { vid.parentNode.classList.add("is-playing"); }, function () {});
-  }, { rootMargin: "300px" }).observe(vid);
+  if (vid && !calm && "IntersectionObserver" in win) {
+    vid.addEventListener("playing", function () { vid.parentNode.classList.add("is-playing"); });
+    new IntersectionObserver(function (e) {
+      if (!e[0].isIntersecting) return vid.pause();
+      vid.muted = true; var pr = vid.play(); if (pr) pr.catch(function () {});
+    }, { rootMargin: "300px" }).observe(vid);
+  }
+  // Phone menu: close it when a link inside is tapped
+  var menu = doc.getElementById("menu");
+  if (menu && menu.hidePopover) menu.addEventListener("click", function (e) { if (e.target.closest("a")) menu.hidePopover(); });
 
   if (card && fineHover && !calm) {
     var raf = 0, px = 0, py = 0;

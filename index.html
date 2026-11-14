@@ -29,7 +29,7 @@
 
 <link rel="preload" href="/assets/fonts/instrument-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" type="image/avif" imagesrcset="/images/box-card-400.avif?v=846513f6 400w, /images/box-card-800.avif?v=846513f6 800w, /images/box-card-1200.avif?v=846513f6 1200w, /images/box-card-1600.avif?v=846513f6 1600w" imagesizes="(min-width: 960px) 54vw, 100vw" fetchpriority="high">
-<link rel="stylesheet" href="/assets/site.css?v=fce8b483d6">
+<link rel="stylesheet" href="/assets/site.css?v=f28077ad11">
 
 <script type="application/ld+json">
 {
@@ -98,8 +98,10 @@
 
 <header class="header" data-header>
   <div class="wrap header__row">
+    <button class="menu-btn" type="button" popovertarget="menu" aria-label="Open menu"><span></span></button>
     <nav class="header__nav" aria-label="Page">
       <a href="#card">The card</a>
+      <a href="#reviews">Reviews</a>
       <a href="#details">Details</a>
       <a href="#faq">FAQs</a>
     </nav>
@@ -107,6 +109,21 @@
     <a class="header__buy" href="#buy" data-buy>Buy now</a>
   </div>
 </header>
+
+<!-- Phone menu: a native popover, so Esc, tap outside and focus all work without script -->
+<div class="menu" id="menu" popover>
+  <p class="menu__brand">Dearly</p>
+  <button class="menu__close" type="button" popovertarget="menu" popovertargetaction="hide" aria-label="Close menu"></button>
+  <nav aria-label="Menu">
+    <a href="#card">The Note</a>
+    <a href="#included">What’s Included</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#details">Specifications</a>
+    <a href="#guarantee">90-Day Guarantee</a>
+    <a href="#faq">FAQs</a>
+  </nav>
+  <a class="btn btn--buy" href="#buy" data-buy><span class="btn__label">Buy now</span></a>
+</div>
 
 <main id="main">
 
@@ -195,7 +212,7 @@
   </section>
 
   <!-- In the box -->
-  <section class="section inbox" aria-labelledby="box-h">
+  <section class="section inbox" id="included" aria-labelledby="box-h">
     <div class="wrap inbox__grid">
       <figure class="inbox__media">
         <picture><source type="image/avif" srcset="/images/box-card-400.avif?v=846513f6 400w, /images/box-card-800.avif?v=846513f6 800w, /images/box-card-1200.avif?v=846513f6 1200w, /images/box-card-1600.avif?v=846513f6 1600w" sizes="(min-width: 900px) 52vw, 100vw"><img src="/images/box-card-800.jpg?v=846513f6" srcset="/images/box-card-400.jpg?v=846513f6 400w, /images/box-card-800.jpg?v=846513f6 800w, /images/box-card-1200.jpg?v=846513f6 1200w, /images/box-card-1600.jpg?v=846513f6 1600w" sizes="(min-width: 900px) 52vw, 100vw" width="1600" height="1600" alt="The necklace set on its card inside the open gift box" loading="lazy" decoding="async"></picture>
@@ -287,7 +304,7 @@
   </section>
 
   <!-- Guarantee -->
-  <section class="section guarantee" aria-labelledby="g-h">
+  <section class="section guarantee" id="guarantee" aria-labelledby="g-h">
     <div class="wrap wrap--narrow center" data-reveal>
       <svg class="seal" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29"/><circle cx="32" cy="32" r="23" stroke-dasharray="2 3"/><text x="32" y="38" text-anchor="middle">90</text></svg>
       <h2 class="h2" id="g-h">90 days to change your mind</h2>
@@ -390,8 +407,9 @@
   </div>
 </div>
 
-<script src="/assets/reviews.js?v=2055397232"></script>
-<script src="/assets/config.js?v=c342b767ce"></script>
-<script src="/assets/site.js?v=cf71292437" defer></script>
+<script src="/assets/clarity.js?v=addb8f0606" defer></script>
+<script src="/assets/reviews.js?v=2055397232" defer></script>
+<script src="/assets/config.js?v=c342b767ce" defer></script>
+<script src="/assets/site.js?v=30c575ba04" defer></script>
 </body>
 </html>
