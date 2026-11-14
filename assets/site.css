@@ -549,24 +549,6 @@ button { font: inherit; color: inherit; }
 .zoom__next { right: 16px; top: 50%; translate: 0 -50%; }
 .zoom__count { position: absolute; bottom: 18px; left: 50%; translate: -50% 0; font-size: .875rem; color: var(--ink-faded); font-variant-numeric: tabular-nums; }
 
-/* ---------- Consent ---------- */
-.consent {
-  position: fixed; z-index: 70; left: 12px; right: 12px; bottom: 12px;
-  max-width: 26rem; padding: 1.1rem 1.2rem;
-  background: var(--paper-raised); border: 1px solid var(--rule); border-radius: var(--radius);
-  box-shadow: var(--shadow-2);
-  font-size: 0.9375rem;
-}
-.consent[hidden] { display: none; }
-.consent__btns { display: flex; gap: .6rem; margin-top: .9rem; }
-.consent__btns .btn { flex: 1; }
-@media (max-width: 639px) {
-  .consent { left: 8px; right: 8px; bottom: 8px; padding: .7rem .8rem; font-size: .8125rem; display: flex; align-items: center; gap: .75rem; }
-  .consent__btns { margin-top: 0; flex: none; gap: .4rem; }
-  .consent__btns .btn { min-height: 40px; padding: 0 .75rem; font-size: .8125rem; }
-}
-@media (min-width: 640px) { .consent { left: 20px; bottom: 20px; right: auto; } }
-
 /* ---------- Scroll reveals: CSS only, off the main thread ---------- */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
@@ -808,4 +790,6 @@ a, button, summary, .gallery__slide { -webkit-tap-highlight-color: transparent; 
 .menu nav a:first-child { border-top: 1px solid var(--rule); }
 .menu .btn { margin-top: 2rem; }
 html:has(.menu:popover-open), html:has(dialog[open]) { overflow: hidden; }
-@media (max-width: 959px) { .has-sticky .consent { bottom: calc(84px + env(safe-area-inset-bottom)); } }
+.choices { margin-block: 1.5rem; padding: 1.25rem; border: 1px solid var(--rule); border-radius: var(--radius); scroll-margin-top: calc(var(--header-h) + 16px); }
+.choices__btns { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+.choices .btn[disabled] { opacity: .4; cursor: default; }

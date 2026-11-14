@@ -15,7 +15,7 @@
   }
   function uid() { return (win.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2); }
 
-  /* Meta Pixel + server-side copy, only after consent */
+  /* Meta Pixel + server-side copy */
   var pixelLoaded = false;
   function loadPixel() {
     if (pixelLoaded) return;
@@ -43,16 +43,8 @@
     } catch (e) {}
   }
 
-  var banner = doc.querySelector("[data-consent]");
-  function setConsent(v) { store(CONSENT_KEY, v); if (banner) banner.hidden = true; if (v === "yes") loadPixel(); else if (win.clarity) win.clarity("consent", false); }
-  var saved = store(CONSENT_KEY);
-  if (saved === "yes") loadPixel();
-  else if (saved !== "no" && banner) setTimeout(function () { banner.hidden = false; }, 1200);
-  doc.addEventListener("click", function (e) {
-    var c = e.target.closest("[data-consent-choice]");
-    if (c) { setConsent(c.getAttribute("data-consent-choice")); return; }
-    if (e.target.closest("[data-consent-open]") && banner) banner.hidden = false;
-  });
+  // No banner: on for everyone, off for anyone who opted out on the cookie policy page
+  if (store(CONSENT_KEY) !== "no") loadPixel();
 
   /* Buy: straight to Shopify checkout */
   var checkoutUrl = "", checkoutOrigin = "";

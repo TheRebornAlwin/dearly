@@ -29,7 +29,7 @@ Some of these providers are located outside your country, including in the Unite
 
 ## Advertising
 
-We advertise on Meta platforms and use the Meta pixel to measure results and show ads to people likely to be interested. You can control this through your Meta ad preferences and through our cookie banner.
+We advertise on Meta platforms and use the Meta pixel to measure results and show ads to people likely to be interested. You can control this through your Meta ad preferences and through the opt-out on our [Cookie Policy](/policies/cookie-policy#choices) page.
 
 ## How long we keep it
 
@@ -51,4 +51,4 @@ Our site runs over HTTPS and payments are handled by PCI-compliant processors. N
 
 We will post any changes here and update the date below.
 
-Last updated: November 11, 2026
+Last updated: November 14, 2026

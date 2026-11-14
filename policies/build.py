@@ -13,7 +13,7 @@ TEMPLATE = """<!doctype html>
 <link rel="canonical" href="https://givedearly.com/policies/{slug}">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.png" type="image/png" sizes="192x192">
-<link rel="stylesheet" href="/assets/site.css?v=f207c297f2">
+<link rel="stylesheet" href="/assets/site.css?v=6816ea6093">
 </head>
 <body>
 <header class="header">
@@ -40,6 +40,16 @@ TEMPLATE = """<!doctype html>
 </html>
 """
 
+# The opt-out control on the cookie policy page (placed with a [[cookie-choices]] line in the .md)
+CHOICES = """    <div class="choices" id="choices" data-choices>
+      <p data-choices-status>Analytics and marketing cookies are on in this browser.</p>
+      <div class="choices__btns">
+        <button type="button" class="btn btn--ghost" data-choice="no">Opt out</button>
+        <button type="button" class="btn" data-choice="yes" disabled>Opt back in</button>
+      </div>
+    </div>
+    <script src="/assets/consent.js?v=ac9bb06c9a" defer></script>"""
+
 def inline(t):
     t = html.escape(t, quote=False)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
@@ -57,6 +67,8 @@ def convert(md):
     for line in md.splitlines():
         s = line.strip()
         if not s: flush(); continue
+        if s == "[[cookie-choices]]":
+            flush(); out.append(CHOICES); continue
         m = re.match(r"^(#{1,3})\s+(.*)", s)
         if m:
             flush(); n = len(m.group(1)); out.append(f"    <h{n}>{inline(m.group(2))}</h{n}>"); continue
