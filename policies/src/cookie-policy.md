@@ -34,6 +34,6 @@ Cookies set by Shopify, Meta, Microsoft, and our other analytics providers are g
 
 ## Contact
 
-thedearlyco@gmail.com
+support@givedearly.com
 
 Last updated: November 14, 2026

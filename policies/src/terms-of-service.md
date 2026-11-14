@@ -63,4 +63,4 @@ These terms are governed by the laws of the United States. Nothing in them takes
 
 ## 15. Contact
 
-thedearlyco@gmail.com
+support@givedearly.com
