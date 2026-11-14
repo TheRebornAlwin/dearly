@@ -8,7 +8,7 @@
    https://<shopDomain>/cart/<variantId>:<quantity>
    While either value is empty, the button shows a short "checkout is being connected" note instead. */
 window.DEARLY_CONFIG = {
-  shopDomain: "tx0mjr-1r.myshopify.com",
+  shopDomain: "checkout.givedearly.com",
   variantId: "63497440788561",
   currency: "USD",
   price: 49.99
