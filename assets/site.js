@@ -159,7 +159,6 @@
       var rt = rating.querySelector("[data-rating-text]");
       rt.textContent = ""; var st = doc.createElement("strong"); st.textContent = avg; rt.appendChild(st);
       rt.appendChild(doc.createTextNode(" from " + cnt + " reviews"));
-      rating.setAttribute("aria-label", "Rated " + avg + " out of 5 from " + cnt + " reviews");
       rating.hidden = false;
     }
   }

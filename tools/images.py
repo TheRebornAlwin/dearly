@@ -43,8 +43,8 @@ for name, rel in PHOTOS.items():
         if w > im.width * 1.3: continue  # allow a small upscale so every srcset width exists
         r = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
         # The main photo is the first thing that loads, so it trades a hair of detail for speed.
-        q, sub = (74, "4:2:0") if name == "box-card" else (82, "4:4:4")
-        r.save(OUT / f"{name}-{w}.avif", quality=q, subsampling=sub, speed=4)
+        q, sub, sp = (56, "4:2:0", 2) if name == "box-card" else (82, "4:4:4", 4)
+        r.save(OUT / f"{name}-{w}.avif", quality=q, subsampling=sub, speed=sp)
         r.save(OUT / f"{name}-{w}.jpg", quality=88, subsampling=0, optimize=True, progressive=True)
     print("built", name)
 
