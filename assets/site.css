@@ -608,6 +608,7 @@ button { font: inherit; color: inherit; }
 .reviews__meta { display: grid; gap: .45rem; font-size: .875rem; color: var(--ink-faded); }
 .stars--lg { font-size: 1.2rem; }
 
+.reviews__progress { display: none; }
 .reviews__grid { columns: 1; column-gap: 1.25rem; }
 @media (min-width: 700px) { .reviews__grid { columns: 2; } }
 @media (min-width: 1100px) { .reviews__grid { columns: 3; column-gap: 1.5rem; } }
@@ -664,6 +665,34 @@ a, button, summary, .gallery__slide { -webkit-tap-highlight-color: transparent; 
   .footer { padding-bottom: calc(2rem + env(safe-area-inset-bottom)); }
 }
 @media (max-width: 340px) { .specs div { grid-template-columns: 1fr; gap: .2rem; } }
+
+/* Reviews on phones: a swipeable row instead of a long column, every review one flick away */
+@media (max-width: 699px) {
+  .reviews__grid {
+    columns: auto; display: flex; gap: 12px; align-items: flex-start;
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1); padding: 6px var(--gutter) 18px; scroll-padding-inline: var(--gutter);
+  }
+  .reviews__grid::-webkit-scrollbar { display: none; }
+  .review { flex: 0 0 84%; margin: 0; scroll-snap-align: start; display: flex; flex-direction: column; padding: 1.4rem 1.35rem 1.2rem; }
+  .review__text { margin-bottom: 1.2rem; }
+  .review__by { margin-top: auto; }
+  .reviews__foot { display: none; }
+  @supports (animation-timeline: scroll()) {
+    .reviews { timeline-scope: --rev; }
+    .reviews__grid { scroll-timeline: --rev inline; }
+    .reviews__progress { display: block; width: 34%; height: 2px; margin: .4rem auto 0; overflow: hidden; border-radius: 2px; background: var(--rule); }
+    .reviews__progress span { display: block; height: 100%; background: var(--wax); transform-origin: left; animation: rev-progress linear both; animation-timeline: --rev; }
+    @keyframes rev-progress { from { transform: scaleX(.12); } to { transform: scaleX(1); } }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      /* the next card waits a step back, then settles forward as it slides in */
+      .review { animation: rev-in linear both; animation-timeline: view(inline); animation-range: entry 0% entry 80%; }
+      @keyframes rev-in { from { opacity: .5; transform: scale(.94); } to { opacity: 1; transform: none; } }
+    }
+  }
+}
 
 /* Touch screens have no hover, so the effects that hover gives on desktop are driven by scroll instead */
 @media (hover: none) and (prefers-reduced-motion: no-preference) {

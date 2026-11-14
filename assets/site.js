@@ -170,7 +170,7 @@
     avgEl.textContent = Number(a).toFixed(1);
     setStars(revSec.querySelector(".reviews__score [data-stars]"), a);
     cntEl.textContent = (R.count || items.length).toLocaleString("en-US") + " reviews";
-    var shown = 0, PAGE = 9;
+    var shown = 0, PAGE = innerWidth < 700 ? 99 : 9; // phones: all, in one row
     var revCard = function (r) {
       var el = doc.createElement("article"); el.className = "review";
       var s = doc.createElement("span"); s.className = "stars"; s.textContent = "★★★★★"; s.setAttribute("role", "img");
