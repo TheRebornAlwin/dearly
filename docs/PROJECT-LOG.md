@@ -673,3 +673,4 @@ Two owner briefs, built from the target-market research (buyer: a man 20 to 45 w
   - The pixel loads 2.5 s after page load, or at the first scroll, tap or keypress. Loading it immediately cost mobile Lighthouse about 13 points.
   - Lighthouse now: mobile 96, desktop 100.
   - The owner says the delivery times are fine as they are.
+- Nov 14: the customer-facing email is support@givedearly.com (Cloudflare Email Routing). The owner's Gmail must never appear on anything a customer sees. The live site was crawled clean, including decoding Cloudflare's email obfuscation. Shopify's own policy pages and store email (Settings > Store details) are changed in the Shopify admin, not here.
