@@ -667,3 +667,9 @@ Two owner briefs, built from the target-market research (buyer: a man 20 to 45 w
 - Open, owner decisions:
   - Shopify's free rate says 8 to 13 business days, but the site says 7 to 14 days and its Dec 6+ ETA implies delivery before Christmas.
   - The pixel only fires after Accept, which is opt-in, so most ad visitors are never tracked.
+- Nov 14:
+  - The cookie banner is removed (owner's call). The Meta Pixel and Clarity are on by default.
+  - The opt-out lives on /policies/cookie-policy#choices (assets/consent.js, [[cookie-choices]] in the .md). The footer "Cookie preferences" link goes there.
+  - The pixel loads 2.5 s after page load, or at the first scroll, tap or keypress. Loading it immediately cost mobile Lighthouse about 13 points.
+  - Lighthouse now: mobile 96, desktop 100.
+  - The owner says the delivery times are fine as they are.
