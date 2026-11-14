@@ -44,9 +44,10 @@
   }
 
   // No banner: on for everyone, off for anyone who opted out on the cookie policy page.
-  // Starts once the page has loaded, or at the first scroll or tap, so it never slows the first photo.
+  // Starts 2.5 s after the page has loaded, or at the first scroll or tap, so it never slows the page.
   if (store(CONSENT_KEY) !== "no") {
-    if (doc.readyState === "complete") loadPixel(); else win.addEventListener("load", loadPixel);
+    var later = function () { setTimeout(loadPixel, 2500); };
+    if (doc.readyState === "complete") later(); else win.addEventListener("load", later);
     ["scroll", "pointerdown", "keydown"].forEach(function (t) { win.addEventListener(t, loadPixel, { once: true, passive: true }); });
   }
 
