@@ -43,8 +43,12 @@
     } catch (e) {}
   }
 
-  // No banner: on for everyone, off for anyone who opted out on the cookie policy page
-  if (store(CONSENT_KEY) !== "no") loadPixel();
+  // No banner: on for everyone, off for anyone who opted out on the cookie policy page.
+  // Starts once the page has loaded, or at the first scroll or tap, so it never slows the first photo.
+  if (store(CONSENT_KEY) !== "no") {
+    if (doc.readyState === "complete") loadPixel(); else win.addEventListener("load", loadPixel);
+    ["scroll", "pointerdown", "keydown"].forEach(function (t) { win.addEventListener(t, loadPixel, { once: true, passive: true }); });
+  }
 
   /* Buy: straight to Shopify checkout */
   var checkoutUrl = "", checkoutOrigin = "";
